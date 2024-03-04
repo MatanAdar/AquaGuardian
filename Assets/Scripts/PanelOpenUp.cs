@@ -31,7 +31,7 @@ public class PanelOpenUp : MonoBehaviour
             Vector3 currentPosition = objectToScale.transform.position;
             for (int i = 1; i < num_caves_from_user; i++)
             {
-                Vector3 newPosition = new Vector3(currentPosition.x, currentPosition.y, (160 * i) + currentPosition.z);
+                Vector3 newPosition = new Vector3(currentPosition.x, currentPosition.y, currentPosition.z - (50 * i) );
                 GameObject newObject = Instantiate(objectToScale, newPosition, Quaternion.identity);
             }
         }
