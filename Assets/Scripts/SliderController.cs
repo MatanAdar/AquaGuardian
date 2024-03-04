@@ -7,15 +7,15 @@ public class SliderController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI sliderText_scale_Y = null;
     [SerializeField] private TextMeshProUGUI sliderText_pos_Y = null;
-    //[SerializeField] private TextMeshProUGUI sliderText_pos_Z = null;
+    [SerializeField] private TextMeshProUGUI sliderText_pos_Z = null;
     [SerializeField] private TextMeshProUGUI sliderText_scale_Z = null;
     [SerializeField] public GameObject objectToScale = null; // Reference to the object you want to scale
     [SerializeField] private float maxSliderAmount = 100.0f;
     [SerializeField] private float maxYScale; // Maximum scale of the object in the Y-axis
     [SerializeField] private float maxPositionY; // Maximum position of the object in the Y-axis
     [SerializeField] private float maxPositionZ;
-    //[SerializeField] private float startPosition_Z = 400f; // Starting position of the object in the Z-axis
-    //[SerializeField] private float maxPosition_Z = 1100f; // Maximum position of the object in the Z-axis
+    [SerializeField] private float startPosition_Z = 400f; // Starting position of the object in the Z-axis
+    [SerializeField] private float maxPosition_Z = 1100f; // Maximum position of the object in the Z-axis
 
 
 
@@ -55,7 +55,7 @@ public class SliderController : MonoBehaviour
         objectToScale.transform.position = newPosition;
     }
 
-/*    public void SliderChange_pos_z(float value)
+    public void SliderChange_pos_z(float value)
     {
         float scaledValue = value * maxSliderAmount;
         sliderText_pos_Z.text = scaledValue.ToString("0");
@@ -71,7 +71,7 @@ public class SliderController : MonoBehaviour
 
         // Apply the new position to the object
         objectToScale.transform.position = newPosition;
-    }*/
+    }
 
     public void SliderChange_scale_z(float value)
     {

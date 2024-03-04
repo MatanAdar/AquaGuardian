@@ -31,4 +31,9 @@ public class ScenesManager : MonoBehaviour
     {
         SceneManager.LoadScene("Menu");
     }
+
+    public void GoToHowToPlay()
+    {
+        SceneManager.LoadScene("how_to_play");
+    }
 }
