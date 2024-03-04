@@ -12,24 +12,12 @@ public class CaveSpawner : MonoBehaviour
     [SerializeField] private TextMeshProUGUI sliderText_pos_Z = null;
 
     private Vector3 positionOfSpawnedObject = Vector3.zero; // Position where the object will be spawned
-    private Vector3 velocityOfSpawnedObject = Vector3.zero; // Velocity of the spawned object
+    private GameObject spawnedObject; // Reference to the spawned object
 
     void Start()
     {
-        // Start the SpawnRoutine coroutine
-        this.StartCoroutine(SpawnRoutine());
-    }
-
-    IEnumerator SpawnRoutine()
-    {
-        while (true)
-        {
-            // Spawn the object with the parameters set by the player
-            GameObject newObject = Instantiate(objectToScale, positionOfSpawnedObject, Quaternion.identity);
-
-            // Wait for a certain amount of time before spawning the next object
-            yield return new WaitForSeconds(1.0f);
-        }
+        // Instantiate the object and store the reference
+        spawnedObject = Instantiate(objectToScale, positionOfSpawnedObject, Quaternion.identity);
     }
 
     public void SliderChange_pos_z(float value)
@@ -44,6 +32,6 @@ public class CaveSpawner : MonoBehaviour
         positionOfSpawnedObject = new Vector3(0, 0, newZPosition);
 
         // Adjust the position of the object to reflect the change in spawn position
-        objectToScale.transform.position = positionOfSpawnedObject;
+        spawnedObject.transform.position = positionOfSpawnedObject;
     }
 }
