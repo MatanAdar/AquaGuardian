@@ -7,6 +7,7 @@ public class PanelOpenUp : MonoBehaviour
     public GameObject Panel;
     [SerializeField] public float maxSliderAmount = 5.0f;
     [SerializeField] public GameObject objectToScale = null;
+    [SerializeField] public GameObject chest = null;
     [SerializeField] public TextMeshProUGUI num_of_caves_Text = null;
     public static float num_caves_from_user = 1;
     [SerializeField] public Slider slider;
@@ -34,6 +35,9 @@ public class PanelOpenUp : MonoBehaviour
                 Vector3 newPosition = new Vector3(currentPosition.x, currentPosition.y, currentPosition.z - (50 * i) );
                 GameObject newObject = Instantiate(objectToScale, newPosition, Quaternion.identity);
             }
+
+            Vector3 newPosition_chest = new Vector3(291.774f, 20.002f, currentPosition.z - (50 * num_caves_from_user));
+            GameObject newObject_chest = Instantiate(chest, newPosition_chest, Quaternion.identity);
         }
     }
 }

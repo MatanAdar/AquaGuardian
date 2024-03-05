@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7088043540672434686}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GRUTA_BASE.OBJ.cleaner.materialmerger.gles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 1397031739179996364}
   - component: {fileID: 2928777968141719820}
   - component: {fileID: 8718488537394856838}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Object_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4810649646523554257}
   - component: {fileID: 4788794352539060682}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: firstCave (20)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2381372436701511969}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,7 +229,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7597115277761773994}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GRUTA_BASE.OBJ.cleaner.materialmerger.gles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 7039915671811019970}
   - component: {fileID: 9143849825500109294}
   - component: {fileID: 3442604059658383705}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Object_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +344,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2032955225114565193}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GRUTA_BASE.OBJ.cleaner.materialmerger.gles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,7 +376,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8360432297066969717}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GRUTA_BASE.OBJ.cleaner.materialmerger.gles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -410,7 +410,7 @@ GameObject:
   - component: {fileID: 1825349628388382881}
   - component: {fileID: 2436366344894937162}
   - component: {fileID: 8991818935966988934}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Object_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -493,7 +493,7 @@ GameObject:
   - component: {fileID: 4983423957361200254}
   - component: {fileID: 7446731066752272260}
   - component: {fileID: 7198752811188791284}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Object_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -576,7 +576,7 @@ GameObject:
   - component: {fileID: 4618740337830937493}
   - component: {fileID: 184507550740552070}
   - component: {fileID: 4948048841289093599}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Object_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -658,7 +658,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7671796517729730519}
   - component: {fileID: 6469766982339543438}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: firstCave (28)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -711,7 +711,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2656366717574042049}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GRUTA_BASE.OBJ.cleaner.materialmerger.gles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -743,7 +743,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7319982547713395285}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GRUTA_BASE.OBJ.cleaner.materialmerger.gles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -777,7 +777,7 @@ GameObject:
   - component: {fileID: 8731804821540187205}
   - component: {fileID: 2232172015326645523}
   - component: {fileID: 6592064354952866722}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Object_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -860,7 +860,7 @@ GameObject:
   - component: {fileID: 5289489491759753072}
   - component: {fileID: 8395142058594916037}
   - component: {fileID: 1786155653300419732}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Object_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -941,7 +941,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5533500988515341320}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GRUTA_BASE.OBJ.cleaner.materialmerger.gles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -974,7 +974,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4445197664088554435}
   - component: {fileID: 7919192811193284552}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: firstCave (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1028,7 +1028,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4202101621976447891}
   - component: {fileID: 2011605538159284876}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: firstCave (24)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1083,7 +1083,7 @@ GameObject:
   - component: {fileID: 5627755481978601389}
   - component: {fileID: 3012366559545499387}
   - component: {fileID: 7804703421581211722}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Object_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1165,7 +1165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3299796350335032122}
   - component: {fileID: 7027358546827868369}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: firstCave (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1219,7 +1219,7 @@ GameObject:
   m_Component:
   - component: {fileID: 244874444619055261}
   - component: {fileID: 4920554320982100676}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: firstCave (23)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1272,7 +1272,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 709972789938360122}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GRUTA_BASE.OBJ.cleaner.materialmerger.gles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1305,7 +1305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 762378992769140161}
   - component: {fileID: 5801325451596953403}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: firstCave (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1358,7 +1358,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 753039749751869454}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GRUTA_BASE.OBJ.cleaner.materialmerger.gles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1392,7 +1392,7 @@ GameObject:
   - component: {fileID: 2998412113207469112}
   - component: {fileID: 4497154362047689937}
   - component: {fileID: 8311972617743675705}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Object_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1475,7 +1475,7 @@ GameObject:
   - component: {fileID: 579260055456935534}
   - component: {fileID: 6379792950260136057}
   - component: {fileID: 4290250915619370875}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Object_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1556,7 +1556,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7906701532102629826}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GRUTA_BASE.OBJ.cleaner.materialmerger.gles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1588,7 +1588,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6798808073705771586}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GRUTA_BASE.OBJ.cleaner.materialmerger.gles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1622,7 +1622,7 @@ GameObject:
   - component: {fileID: 584050951521199844}
   - component: {fileID: 2828228624264044648}
   - component: {fileID: 2532460921624680460}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Object_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1705,7 +1705,7 @@ GameObject:
   - component: {fileID: 8446528728667876255}
   - component: {fileID: 2500868362819824590}
   - component: {fileID: 3361814576417487699}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Object_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1788,7 +1788,7 @@ GameObject:
   - component: {fileID: 7023695185453795390}
   - component: {fileID: 521302864655782824}
   - component: {fileID: 3210727872743256042}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Object_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1869,7 +1869,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8648517946165818239}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GRUTA_BASE.OBJ.cleaner.materialmerger.gles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1902,7 +1902,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1604532876636105673}
   - component: {fileID: 9107667188862706153}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: firstCave (26)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1957,7 +1957,7 @@ GameObject:
   - component: {fileID: 2805136661189881044}
   - component: {fileID: 7605309052001851334}
   - component: {fileID: 810804014067221252}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Object_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2038,7 +2038,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6751572250236935525}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GRUTA_BASE.OBJ.cleaner.materialmerger.gles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2070,7 +2070,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6927420990484669461}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GRUTA_BASE.OBJ.cleaner.materialmerger.gles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2103,7 +2103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1223231166417999433}
   - component: {fileID: 2345031177660594197}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: firstCave (19)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2158,7 +2158,7 @@ GameObject:
   - component: {fileID: 2862148176906544215}
   - component: {fileID: 7317643302542418350}
   - component: {fileID: 5581803414800818180}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Object_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2240,7 +2240,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2576743518777257228}
   - component: {fileID: 6088729422151278071}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: firstCave (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2294,7 +2294,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4350691434487813814}
   - component: {fileID: 1503790088793867633}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: firstCave (22)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2348,7 +2348,7 @@ GameObject:
   m_Component:
   - component: {fileID: 338452571230052004}
   - component: {fileID: 7921864970536607376}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: firstCave (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2402,7 +2402,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6727898932988061644}
   - component: {fileID: 2068481447232480505}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: firstCave (25)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2457,7 +2457,7 @@ GameObject:
   - component: {fileID: 2751086502623726681}
   - component: {fileID: 1603231166314436922}
   - component: {fileID: 3022045749952501626}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Object_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2540,7 +2540,7 @@ GameObject:
   - component: {fileID: 1806421976842597883}
   - component: {fileID: 7963603024988117131}
   - component: {fileID: 592249893215613554}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Object_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2621,7 +2621,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5327122121154460913}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GRUTA_BASE.OBJ.cleaner.materialmerger.gles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2654,7 +2654,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8798673370722252375}
   - component: {fileID: 1744250577214744896}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: firstCave (27)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2708,7 +2708,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1510457843531611876}
   - component: {fileID: 7155046446669925919}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: firstCave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2761,7 +2761,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1425796001650596525}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GRUTA_BASE.OBJ.cleaner.materialmerger.gles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2793,7 +2793,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9099484193838132739}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GRUTA_BASE.OBJ.cleaner.materialmerger.gles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2827,7 +2827,7 @@ GameObject:
   - component: {fileID: 4216631249440289251}
   - component: {fileID: 7340147682685055391}
   - component: {fileID: 6960989632643493609}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Object_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2909,7 +2909,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7519728582147108358}
   - component: {fileID: 7428736408345533902}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: firstCave (17)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2963,7 +2963,7 @@ GameObject:
   m_Component:
   - component: {fileID: 76272140221105873}
   - component: {fileID: 8817963041132235059}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: firstCave (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3016,7 +3016,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5684700414481873928}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GRUTA_BASE.OBJ.cleaner.materialmerger.gles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3048,7 +3048,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7151863272307432297}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GRUTA_BASE.OBJ.cleaner.materialmerger.gles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3081,7 +3081,7 @@ GameObject:
   m_Component:
   - component: {fileID: 464966807286846177}
   - component: {fileID: 6360356702576735712}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: firstCave (21)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3134,7 +3134,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8993700700587102765}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GRUTA_BASE.OBJ.cleaner.materialmerger.gles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3167,7 +3167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3596579036471870164}
   - component: {fileID: 8254872559557697973}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: firstCave (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3222,7 +3222,7 @@ GameObject:
   - component: {fileID: 4332856596288116677}
   - component: {fileID: 5217514170093889415}
   - component: {fileID: 5234853953089372417}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Object_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3305,7 +3305,7 @@ GameObject:
   - component: {fileID: 3844664263218836732}
   - component: {fileID: 2354914617555527742}
   - component: {fileID: 4977565847813909070}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Object_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3387,7 +3387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3347872282916312448}
   - component: {fileID: 713054125439642905}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: firstCave (18)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
