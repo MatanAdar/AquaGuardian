@@ -12,6 +12,7 @@ public class SliderController : MonoBehaviour
     [SerializeField] public GameObject objectToScale = null; // Reference to the object you want to scale
     [SerializeField] private float maxSliderAmount = 100.0f;
     [SerializeField] private float maxYScale; // Maximum scale of the object in the Y-axis
+    [SerializeField] private float maxZScale; // Maximum scale of the object in the Y-axis
     [SerializeField] private float maxPositionY; // Maximum position of the object in the Y-axis
     [SerializeField] private float maxPositionZ;
     [SerializeField] public GameObject waterSurface = null;
@@ -80,7 +81,7 @@ public class SliderController : MonoBehaviour
         sliderText_scale_Z.text = scaledValue.ToString("0");
 
         // Calculate the new scale based on the slider value
-        float newZScale = Mathf.Lerp(0.5f, maxYScale, -(scaledValue / maxSliderAmount));
+        float newZScale = Mathf.Lerp(0.5f, maxZScale, scaledValue / maxSliderAmount);
 
         // Get the current scale of the object
         Vector3 currentScale = objectToScale.transform.localScale;

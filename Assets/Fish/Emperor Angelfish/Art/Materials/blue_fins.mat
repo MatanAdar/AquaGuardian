@@ -26,8 +26,6 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _ALPHAPREMULTIPLY_ON
-  - _METALLICSPECGLOSSMAP
-  - _NORMALMAP
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords:
   - _ALPHABLEND_ON
@@ -46,7 +44,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 09441768aca821040bb07fb346535cd1, type: 3}
+        m_Texture: {fileID: 2800000, guid: f0d64188b912b5a43b264cdc86a32bf2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -70,7 +68,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 09441768aca821040bb07fb346535cd1, type: 3}
+        m_Texture: {fileID: 2800000, guid: f0d64188b912b5a43b264cdc86a32bf2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:

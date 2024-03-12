@@ -19,7 +19,7 @@ public class ScenesManager : MonoBehaviour
 
     public void GoToGameScene()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Scene_Ocean");
     }
 
     public void GoToSettingScene()
