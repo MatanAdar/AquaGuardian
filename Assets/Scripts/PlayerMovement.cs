@@ -24,6 +24,9 @@ public class PlayerMovement : MonoBehaviour
 
     private int counterFish = 0;
 
+    private bool canCollide = true;
+    public float collisionDelay = 2f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -100,14 +103,46 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision collision)
     {
         // Check if the player has collided with the cave
-        if (other.CompareTag("Cave") && blue != null)
+        if (collision.collider.CompareTag("Cave") && blue != null && counterFish == 0)
         {
-            Debug.Log("collide");
+            Debug.Log("Collide");
             // Disable the fish when colliding with the cave
             blue.SetActive(false);
+            counterFish++;
+            StartCoroutine(DisableFishAndDelay());
         }
+        else if (collision.collider.CompareTag("Cave") && purple != null && counterFish == 1 && canCollide)
+        {
+            Debug.Log("Collide");
+            // Disable the fish when colliding with the cave
+            purple.SetActive(false);
+            counterFish++;
+            StartCoroutine(DisableFishAndDelay());
+        }
+        else if (collision.collider.CompareTag("Cave") && green != null && counterFish == 2 && canCollide)
+        {
+            Debug.Log("Collide");
+            // Disable the fish when colliding with the cave
+            green.SetActive(false);
+            counterFish++;
+            StartCoroutine(DisableFishAndDelay());
+        }
+        else if (collision.collider.CompareTag("Cave") && red != null && counterFish == 3 && canCollide)
+        {
+            Debug.Log("Collide");
+            // Disable the fish when colliding with the cave
+            red.SetActive(false);
+            counterFish++;
+            StartCoroutine(DisableFishAndDelay());
+        }
+    }
+
+    private IEnumerator DisableFishAndDelay() {
+        canCollide = false; // Prevent further collisions temporarily
+        yield return new WaitForSeconds(collisionDelay);
+        canCollide = true; // Allow collisions again after the delay
     }
 }
