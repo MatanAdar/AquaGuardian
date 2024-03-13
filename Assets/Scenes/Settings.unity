@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -154,15 +154,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sliderText_scale_Y: {fileID: 0}
   sliderText_pos_Y: {fileID: 0}
-  sliderText_pos_Z: {fileID: 0}
   sliderText_scale_Z: {fileID: 0}
   objectToScale: {fileID: 873030454700674391, guid: e088ffd3f108b554798154446498e5d2, type: 3}
   maxSliderAmount: 100
   maxYScale: 0
+  maxZScale: 0
   maxPositionY: 0
   maxPositionZ: 0
-  startPosition_Z: 400
-  maxPosition_Z: 1100
+  waterSurface: {fileID: 0}
 --- !u!4 &6210960
 Transform:
   m_ObjectHideFlags: 0
@@ -283,7 +282,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 635, y: -443}
-  m_SizeDelta: {x: 600, y: 140}
+  m_SizeDelta: {x: 600, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &123940121
 MonoBehaviour:
@@ -416,7 +415,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -777, y: -443}
-  m_SizeDelta: {x: 300, y: 140}
+  m_SizeDelta: {x: 250, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &128704819
 MonoBehaviour:
@@ -638,7 +637,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -5, y: -7}
+  m_AnchoredPosition: {x: 0, y: 1}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &522230555
@@ -748,6 +747,7 @@ GameObject:
   m_Component:
   - component: {fileID: 668098136}
   - component: {fileID: 668098135}
+  - component: {fileID: 668098137}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -832,6 +832,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &668098137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668098134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &792448167
 GameObject:
   m_ObjectHideFlags: 0

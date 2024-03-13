@@ -17,7 +17,7 @@ public class PanelOpenUp : MonoBehaviour
         Debug.Log("before update: " + num_caves_from_user);
         float scaledValue = value;
         num_of_caves_Text.text = scaledValue.ToString("0");
-       
+
         num_caves_from_user = value;
         Debug.Log("num_caves_from_user after update: " + num_caves_from_user);
     }
@@ -32,12 +32,14 @@ public class PanelOpenUp : MonoBehaviour
             Vector3 currentPosition = objectToScale.transform.position;
             for (int i = 1; i < num_caves_from_user; i++)
             {
-                Vector3 newPosition = new Vector3(currentPosition.x, currentPosition.y, currentPosition.z - (50 * i) );
+                Vector3 newPosition = new Vector3(currentPosition.x, currentPosition.y, currentPosition.z - (50 * i));
                 GameObject newObject = Instantiate(objectToScale, newPosition, Quaternion.identity);
             }
 
             Vector3 newPosition_chest = new Vector3(291.774f, 20.002f, currentPosition.z - (50 * num_caves_from_user));
             GameObject newObject_chest = Instantiate(chest, newPosition_chest, Quaternion.identity);
+
         }
     }
+
 }

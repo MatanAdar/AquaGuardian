@@ -17,7 +17,7 @@ Material:
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -41,6 +41,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -80,6 +84,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Tex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _VAT:
         m_Texture: {fileID: 2800000, guid: e7227404c5e250744a08ad4fcb8e659f, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -106,6 +114,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Abs: 0
     - _AlphaCutoff: 0.5
     - _BumpScale: 1
     - _CausticsIntensity: 1
@@ -116,6 +125,7 @@ Material:
     - _DstBlend: 0
     - _EmissionIntencity: 3
     - _EnvironmentReflections: 1
+    - _Exposure: 1
     - _FakeReflections: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.797
@@ -127,6 +137,7 @@ Material:
     - _NormalIntencity: 0.05
     - _NormalIntensity: 1
     - _OcclusionStrength: 1
+    - _Offset: 0
     - _OffsetScale: 0.1
     - _Opacity_Add: 0.1
     - _Opacity_Min: 0
@@ -136,14 +147,18 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _RefractionCubemap: 0.4
+    - _Rotation: 0
+    - _Scale: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Type: 6
     - _UVSec: 0
     - _VATSpeed: 0.5
     - _VAT_Amount: 0.2
     - _VAT_Speed: 0.5
     - _VertexAnimation_On: 1
+    - _WindQuality: 0
     - _ZWrite: 1
     - __dirty: 0
     m_Colors:
@@ -151,4 +166,19 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveAditive: {r: 0.14524741, g: 0.38332835, b: 0.6037736, a: 1}
     - _EmissiveColor: {r: 0, g: 2.1025352, b: 4.669581, a: 1}
+    - _HueVariation: {r: 1, g: 0.5, b: 0, a: 0.1}
+    - _Tint: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
   m_BuildTextureStacks: []
+--- !u!114 &9173573898456456991
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
