@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using System;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,7 +15,10 @@ public class PlayerMovement : MonoBehaviour
     public GameObject Panel;
     private bool canMove = true; // Set to true by default
 
-    [SerializeField] public TextMeshProUGUI infoText; // Reference to the text object
+    [SerializeField] public TextMeshProUGUI infoText1; // Reference to the text object
+    [SerializeField] public TextMeshProUGUI infoText2; // Reference to the text object
+    [SerializeField] public TextMeshProUGUI infoText3; // Reference to the text object
+    [SerializeField] public TextMeshProUGUI infoText4; // Reference to the text object
     private bool show = true;
 
     [SerializeField] GameObject blue;
@@ -27,15 +31,20 @@ public class PlayerMovement : MonoBehaviour
     private bool canCollide = true;
     public float collisionDelay = 2f;
 
+    [SerializeField] string sceneName;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         // Make sure to set the Rigidbody's collision detection mode to Continuous for accurate collision handling
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
 
-        if (infoText != null)
+        if (infoText1 != null && infoText2 != null && infoText3 != null && infoText4 != null)
         {
-            infoText.gameObject.SetActive(false); // Hide the text initially
+            infoText1.gameObject.SetActive(false); // Hide the text initially
+            infoText2.gameObject.SetActive(false); // Hide the text initially
+            infoText3.gameObject.SetActive(false); // Hide the text initially
+            infoText4.gameObject.SetActive(false); // Hide the text initially
         }
     }
 
@@ -95,11 +104,25 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator ShowInfoText()
     {
-        if (infoText != null)
+        if (infoText1 != null && infoText2 != null && infoText3 != null && infoText4 != null)
         {
-            infoText.gameObject.SetActive(true); // Show the text
-            yield return new WaitForSeconds(4f); // Wait for 4 seconds
-            infoText.gameObject.SetActive(false); // Hide the text after 4 seconds
+            infoText1.gameObject.SetActive(true); // Show the text
+            infoText2.gameObject.SetActive(true); // Show the text
+            yield return new WaitForSeconds(5f); // Wait for 4 seconds
+            infoText1.gameObject.SetActive(false); // Hide the text after 4 seconds
+            infoText2.gameObject.SetActive(false); // Hide the text after 4 seconds
+
+            yield return new WaitForSeconds(0.5f);
+
+            infoText3.gameObject.SetActive(true); // Show the text
+            yield return new WaitForSeconds(4f);
+            infoText3.gameObject.SetActive(false); // Show the text
+
+            yield return new WaitForSeconds(0.5f);
+
+            infoText4.gameObject.SetActive(true); // Show the text
+            yield return new WaitForSeconds(4f);
+            infoText4.gameObject.SetActive(false); // Hide the text after 4 seconds
         }
     }
 
@@ -136,7 +159,8 @@ public class PlayerMovement : MonoBehaviour
             // Disable the fish when colliding with the cave
             red.SetActive(false);
             counterFish++;
-            StartCoroutine(DisableFishAndDelay());
+            SceneManager.LoadScene(sceneName);
+
         }
     }
 

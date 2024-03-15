@@ -1,0 +1,79 @@
+using UnityEngine;
+
+public class FishMover1 : MonoBehaviour
+{
+    [SerializeField] GameObject player;
+    Vector3 lastPlayerPosition;
+    public float randomYRange = 1f; // Reduced range for random y-coordinate
+    Vector3 moveDirection;
+    float moveSpeed;
+
+    // Factor to reduce the speed
+    public float speedFactor = 0.5f;
+
+    // Smoothness factor for interpolation
+    public float smoothness = 0.5f;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        // Initialize the last player position
+        lastPlayerPosition = player.transform.position;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        // Calculate the movement direction and speed based on player's movement
+        CalculateMovement();
+
+        // Move the fish
+        MoveFish();
+
+        CheckVerticalMovementInput();
+    }
+
+    // Calculate the movement direction and speed based on player's movement
+    void CalculateMovement()
+    {
+        // Calculate movement direction
+        Vector3 currentPosition = player.transform.position;
+        Vector3 playerMovement = currentPosition - lastPlayerPosition;
+        float deltaX = playerMovement.x;
+        float deltaY = playerMovement.y;
+        float deltaZ = playerMovement.z;
+
+        // Calculate movement speed (magnitude of the direction vector)
+        moveSpeed = playerMovement.magnitude / Time.deltaTime * speedFactor;
+
+        // Update the last player position
+        lastPlayerPosition = currentPosition;
+    }
+
+    // Move the fish
+    void MoveFish()
+    {
+        // Generate a random y-coordinate within the specified range
+        float randomY = Random.Range(player.transform.position.y - 1f, player.transform.position.y + 1f);
+
+        // Smoothly interpolate between the current position and the new position
+        Vector3 targetPosition = new Vector3(transform.position.x, randomY, player.transform.position.z) + moveDirection.normalized * moveSpeed * Time.deltaTime;
+        transform.position = Vector3.Lerp(transform.position, targetPosition, smoothness * Time.deltaTime);
+    }
+
+    // Check for vertical movement input
+    void CheckVerticalMovementInput()
+    {
+        // Check for 'G' key press to move down
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            transform.Translate(Vector3.down);
+        }
+
+        // Check for 'Y' key press to move up
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            transform.Translate(Vector3.up);
+        }
+    }
+}

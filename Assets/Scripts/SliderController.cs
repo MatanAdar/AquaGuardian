@@ -27,7 +27,7 @@ public class SliderController : MonoBehaviour
         sliderText_scale_Y.text = scaledValue.ToString("0");
 
         // Calculate the new scale based on the slider value
-        float newYScale = Mathf.Lerp(0.35f, waterSurface.transform.localScale.y, (scaledValue / maxSliderAmount)*0.01f);
+        float newYScale = Mathf.Lerp(0.35f, maxYScale, (scaledValue / maxSliderAmount)*0.01f);
 
         // Get the current scale of the object
         Vector3 currentScale = objectToScale.transform.localScale;
@@ -45,7 +45,7 @@ public class SliderController : MonoBehaviour
         sliderText_pos_Y.text = scaledValue.ToString("0");
 
         // Calculate the new Y position based on the slider value
-        float newYPosition = Mathf.Lerp(27.17202f, waterSurface.transform.localScale.y, scaledValue / maxSliderAmount);
+        float newYPosition = Mathf.Lerp(27.17202f, maxPositionY, scaledValue / maxSliderAmount);
 
         // Get the current position of the object
         Vector3 currentPosition = objectToScale.transform.position;
