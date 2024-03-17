@@ -7,6 +7,7 @@ public class PlayerLife : MonoBehaviour
     public int maxCollisions = 3; // Maximum number of collisions allowed
     private int currentCollisions = 0; // Current number of collisions
     private bool canCollide = true; // Flag to control collision timing
+    private float waitTime = 2f;
 
     public GameObject objectToDisappear1;
     public GameObject objectToDisappear2;
@@ -19,16 +20,7 @@ public class PlayerLife : MonoBehaviour
             currentCollisions++; // Increment collision count
             Debug.Log("adi_colosion");
 
-           /* if (currentCollisions >= maxCollisions)
-            {
-                
-                // Call the GameOver method after 1 second delay
-                Invoke("GameOver", 1f);
-            }
-            else
-            {*/
-                StartCoroutine(DisableObjectAndDelay(currentCollisions));
-            
+            StartCoroutine(DisableObjectAndDelay(currentCollisions));
         }
     }
 
@@ -49,13 +41,13 @@ public class PlayerLife : MonoBehaviour
             case 3:
                 if (objectToDisappear3 != null)
                     objectToDisappear3.SetActive(false);
-                    // Call the GameOver method after 1 second delay
+                    // Call the GameOver method after 0.2f second delay
                     Invoke("GameOver", 0.2f);
                 break;
             default:
                 break;
         }
-        yield return new WaitForSeconds(2f); // Wait for 2 seconds
+        yield return new WaitForSeconds(waitTime); // Wait for 2 seconds
         canCollide = true; // Enable collision after delay
     }
 

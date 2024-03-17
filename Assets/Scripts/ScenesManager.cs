@@ -36,4 +36,10 @@ public class ScenesManager : MonoBehaviour
     {
         SceneManager.LoadScene("how_to_play");
     }
+
+    // Quit the game and close the application
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

@@ -16,6 +16,9 @@ public class FishMover1 : MonoBehaviour
     private bool canMove = true;
     public float statePlaterY;
     public GameObject Panel;
+    private float pivotUp = 7.5f;
+    private float fishKeepUpWithPlayer = 2f;
+
 
     public void SetMaxOffsetUp(float Up)
     {
@@ -59,65 +62,6 @@ public class FishMover1 : MonoBehaviour
     }
 
 
-
-    /* if (maxOffsetUp != 0)
-     {
-
-
-         // Calculate new maxY and minY based on player's position
-         float maxY = player.transform.position.y + maxOffsetUp;
-         float minY = player.transform.position.y - maxOffsetDown;
-         float randomY;
-
-         // float randomYU = Random.Range(stateY, maxY);
-          float randomYD = Random.Range(minY, stateY);//
-
-         // Check if the user presses the space key
-
-         // If space key is pressed, use randomYU
-
-
-         randomY = Random.Range(minY, maxY);
-         //   while (maxOffsetUp == 0)
-            {
-                MoveDown();
-               // randomY = 0;
-             //   SetMaxOffsetUp()
-            }//
-
-
-         // If space key is not pressed, use randomYD
-         //  randomY = Random.Range(player.transform.position.y, );
-
-
-
-         targetPosition = new Vector3(transform.position.x, randomY, player.transform.position.z);
-
-
-     }
-*/
-
-
-    // Start a coroutine to hold the target position for 3 seconds
-
-
-
-    // Coroutine to hold the target position for 3 seconds
-
-
-
-    /*        targetPosition = new Vector3(transform.position.x, randomY, player.transform.position.z);
-
-            targetPosition = new Vector3(transform.position.x, randomY, player.transform.position.z);
-
-            targetPosition = new Vector3(transform.position.x, randomY, player.transform.position.z);
-            targetPosition = new Vector3(transform.position.x, randomY, player.transform.position.z);
-            targetPosition = new Vector3(transform.position.x, randomY, player.transform.position.z);*/
-
-
-
-
-
     // Update is called once per frame
     void Update()
     {
@@ -141,7 +85,7 @@ public class FishMover1 : MonoBehaviour
             }
             // Move towards the target position
             float horizontalMoveSpeed = player.GetComponent<PlayerMovement>().speed;
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, 2 * horizontalMoveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, fishKeepUpWithPlayer * horizontalMoveSpeed * Time.deltaTime);
 
             // If reached the target position, set a new target position
             if (Vector3.Distance(transform.position, targetPosition) < 0.01f) // Check distance within a threshold
@@ -161,9 +105,6 @@ public class FishMover1 : MonoBehaviour
     void CheckVerticalMovementInput()
     {
 
-
-
-
         // Move down when 'G' is pressed
         if (Input.GetKeyDown(KeyCode.G))
         {
@@ -180,17 +121,13 @@ public class FishMover1 : MonoBehaviour
     // Move the fish down
     void MoveDown()
     {
-
         targetPosition = new Vector3(transform.position.x, transform.position.y - verticalMoveSpeedDown, player.transform.position.z);
-        /*   -verticalMoveSpeed*/
     }
 
     // Move the fish up
     void MoveUp()
-    {/*
-        targetPosition = player.transform.position;
-        +verticalMoveSpeed*/
-        targetPosition = new Vector3(transform.position.x, Mathf.Min(player.transform.position.y+ 7.5f, transform.position.y + verticalMoveSpeedUp), player.transform.position.z); ;
+    {
+        targetPosition = new Vector3(transform.position.x, Mathf.Min(player.transform.position.y+ pivotUp, transform.position.y + verticalMoveSpeedUp), player.transform.position.z); ;
     }
 
 
