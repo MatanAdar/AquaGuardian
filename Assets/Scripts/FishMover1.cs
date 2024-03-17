@@ -190,7 +190,7 @@ public class FishMover1 : MonoBehaviour
     {/*
         targetPosition = player.transform.position;
         +verticalMoveSpeed*/
-        targetPosition = new Vector3(transform.position.x, Mathf.Min(player.transform.position.y+ 3.5f, transform.position.y + verticalMoveSpeedUp), player.transform.position.z); ;
+        targetPosition = new Vector3(transform.position.x, Mathf.Min(player.transform.position.y+ 7.5f, transform.position.y + verticalMoveSpeedUp), player.transform.position.z); ;
     }
 
 

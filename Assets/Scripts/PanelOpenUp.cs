@@ -12,7 +12,7 @@ public class PanelOpenUp : MonoBehaviour
     [SerializeField] public GameObject objectToScale = null;
     [SerializeField] public GameObject chest = null;
     [SerializeField] public TextMeshProUGUI num_of_caves_Text = null;
-    public static float num_caves_from_user = 0;
+    public float num_caves_from_user = 0;
     [SerializeField] public Slider slider;
     private int pivotPlace = 50;
     private float chestX = 291.774f;
@@ -20,6 +20,7 @@ public class PanelOpenUp : MonoBehaviour
 
     public void num_of_caves(float value)
     {
+        num_caves_from_user = 0;
         Debug.Log("before update: " + num_caves_from_user);
 
         // Round down the value to the nearest integer
