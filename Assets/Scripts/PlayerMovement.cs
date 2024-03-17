@@ -19,7 +19,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public TextMeshProUGUI infoText2; // Reference to the text object
     [SerializeField] public TextMeshProUGUI infoText3; // Reference to the text object
     [SerializeField] public TextMeshProUGUI infoText4; // Reference to the text object
+    [SerializeField] public TextMeshProUGUI infoText5; // Reference to the text object
+    [SerializeField] public TextMeshProUGUI infoText6; // Reference to the text object
+    [SerializeField] public TextMeshProUGUI infoText7; // Reference to the text object
+
+    [SerializeField] public GameObject key1; // Reference to the key object
+    [SerializeField] public GameObject key2; // Reference to the key object
+    [SerializeField] public GameObject key3; // Reference to the key object
     private bool show = true;
+    private bool afterText = false;
+    
 
     [SerializeField] GameObject blue;
     [SerializeField] GameObject green;
@@ -39,12 +48,23 @@ public class PlayerMovement : MonoBehaviour
         // Make sure to set the Rigidbody's collision detection mode to Continuous for accurate collision handling
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
 
-        if (infoText1 != null && infoText2 != null && infoText3 != null && infoText4 != null)
+        if (infoText1 != null && infoText2 != null && infoText3 != null && infoText4 != null && infoText5 != null && infoText6 != null && infoText7 != null)
         {
             infoText1.gameObject.SetActive(false); // Hide the text initially
             infoText2.gameObject.SetActive(false); // Hide the text initially
             infoText3.gameObject.SetActive(false); // Hide the text initially
             infoText4.gameObject.SetActive(false); // Hide the text initially
+            infoText5.gameObject.SetActive(false); // Hide the text initially
+            infoText6.gameObject.SetActive(false); // Hide the text initially
+            infoText7.gameObject.SetActive(false); // Hide the text initially
+
+        }
+
+        if(key1 != null && key2 != null && key3 != null)
+        {
+            key1.gameObject.SetActive(false);
+            key2.gameObject.SetActive(false);
+            key3.gameObject.SetActive(false);
         }
     }
 
@@ -56,20 +76,25 @@ public class PlayerMovement : MonoBehaviour
             canMove = !Panel.activeSelf;
         }
 
-        if (canMove)
+        if (!blue.gameObject.activeInHierarchy && !green.gameObject.activeInHierarchy && !red.gameObject.activeInHierarchy && !purple.gameObject.activeInHierarchy)
         {
-            if (show)
-            {
-                // Show the info text for 4 seconds
-                StartCoroutine(ShowInfoText());
-                show = false;
-            }
+            SceneManager.LoadScene(sceneName);
+        }
 
-            float horizontalInput = Input.GetAxis("Horizontal");
-            float verticalInput = Input.GetAxis("Vertical");
-            float upDownInput = Input.GetAxis("UpDown");
+        if (show && !Panel.activeSelf)
+        {
+            // Show the info text for 4 seconds
+            StartCoroutine(ShowInfoTextAndKeys());
 
-            Vector3 movementDirection = new Vector3(horizontalInput, upDownInput, verticalInput); // Allow vertical input for movement
+            show = false;
+            
+        }
+
+        if (canMove && afterText)
+        {
+
+            // Always move the player forward
+            Vector3 movementDirection = Vector3.forward; // Move along the z-axis (forward direction)
             movementDirection.Normalize();
 
             // Apply movement
@@ -77,6 +102,7 @@ public class PlayerMovement : MonoBehaviour
             rb.MovePosition(rb.position + move);
 
             // Apply vertical movement directly
+            float upDownInput = Input.GetAxis("UpDown");
             float verticalMovement = upDownInput * verticalSpeed * Time.deltaTime;
 
             // If no down input, apply idle upward movement
@@ -87,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
 
             rb.MovePosition(rb.position + Vector3.up * verticalMovement);
 
-            // Rotate towards movement direction
+            // Rotate towards forward direction
             if (movementDirection != Vector3.zero)
             {
                 Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
@@ -96,77 +122,80 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+
     // Method to toggle player movement on or off
     public void ToggleMovement(bool move)
     {
         canMove = move;
     }
 
-    private IEnumerator ShowInfoText()
+    private IEnumerator ShowInfoTextAndKeys()
     {
-        if (infoText1 != null && infoText2 != null && infoText3 != null && infoText4 != null)
+        if (key1 != null && key2 != null && key3 != null)
+        {
+            key1.gameObject.SetActive(true);
+            key2.gameObject.SetActive(true);
+            key3.gameObject.SetActive(true);
+        }
+
+        if (infoText1 != null && infoText2 != null && infoText3 != null && infoText4 != null && infoText5 != null && infoText6 != null && infoText7 != null)
         {
             infoText1.gameObject.SetActive(true); // Show the text
+            yield return WaitForSecondsOrSkip(3f); // Wait for 3 seconds or skip if Enter is pressed
+            infoText1.gameObject.SetActive(false); // Hide the text after 3 seconds
+
+            yield return WaitForSecondsOrSkip(1f); // Wait for 1 second or skip if Enter is pressed
+
             infoText2.gameObject.SetActive(true); // Show the text
-            yield return new WaitForSeconds(5f); // Wait for 4 seconds
-            infoText1.gameObject.SetActive(false); // Hide the text after 4 seconds
+            yield return WaitForSecondsOrSkip(4f); // Wait for 4 seconds or skip if Enter is pressed
             infoText2.gameObject.SetActive(false); // Hide the text after 4 seconds
 
-            yield return new WaitForSeconds(0.5f);
+            yield return WaitForSecondsOrSkip(1f); // Wait for 1 second or skip if Enter is pressed
 
             infoText3.gameObject.SetActive(true); // Show the text
-            yield return new WaitForSeconds(4f);
-            infoText3.gameObject.SetActive(false); // Show the text
+            yield return WaitForSecondsOrSkip(4f); // Wait for 4 seconds or skip if Enter is pressed
+            infoText3.gameObject.SetActive(false); // Hide the text after 4 seconds
 
-            yield return new WaitForSeconds(0.5f);
+            yield return WaitForSecondsOrSkip(1f); // Wait for 1 second or skip if Enter is pressed
 
             infoText4.gameObject.SetActive(true); // Show the text
-            yield return new WaitForSeconds(4f);
+            yield return WaitForSecondsOrSkip(4f); // Wait for 4 seconds or skip if Enter is pressed
             infoText4.gameObject.SetActive(false); // Hide the text after 4 seconds
+
+            yield return WaitForSecondsOrSkip(1f); // Wait for 1 second or skip if Enter is pressed
+
+            infoText5.gameObject.SetActive(true); // Show the text
+            yield return WaitForSecondsOrSkip(4f); // Wait for 4 seconds or skip if Enter is pressed
+            infoText5.gameObject.SetActive(false); // Hide the text after 4 seconds
+
+            yield return WaitForSecondsOrSkip(1f); // Wait for 1 second or skip if Enter is pressed
+
+            infoText6.gameObject.SetActive(true); // Show the text
+            yield return WaitForSecondsOrSkip(1f); // Wait for 1 second or skip if Enter is pressed
+            infoText6.gameObject.SetActive(false); // Hide the text after 1 second
+
+            yield return WaitForSecondsOrSkip(1f); // Wait for 1 second or skip if Enter is pressed
+
+            infoText7.gameObject.SetActive(true); // Show the text
+            yield return WaitForSecondsOrSkip(1f); // Wait for 1 second or skip if Enter is pressed
+            infoText7.gameObject.SetActive(false); // Hide the text after 1 second
+            afterText = true;
         }
+
     }
 
-    void OnCollisionEnter(Collision collision)
+    IEnumerator WaitForSecondsOrSkip(float seconds)
     {
-        // Check if the player has collided with the cave
-        if (collision.collider.CompareTag("Cave") && blue != null && counterFish == 0)
+        float elapsedTime = 0f;
+        while (elapsedTime < seconds)
         {
-            Debug.Log("Collide");
-            // Disable the fish when colliding with the cave
-            blue.SetActive(false);
-            counterFish++;
-            StartCoroutine(DisableFishAndDelay());
-        }
-        else if (collision.collider.CompareTag("Cave") && purple != null && counterFish == 1 && canCollide)
-        {
-            Debug.Log("Collide");
-            // Disable the fish when colliding with the cave
-            purple.SetActive(false);
-            counterFish++;
-            StartCoroutine(DisableFishAndDelay());
-        }
-        else if (collision.collider.CompareTag("Cave") && green != null && counterFish == 2 && canCollide)
-        {
-            Debug.Log("Collide");
-            // Disable the fish when colliding with the cave
-            green.SetActive(false);
-            counterFish++;
-            StartCoroutine(DisableFishAndDelay());
-        }
-        else if (collision.collider.CompareTag("Cave") && red != null && counterFish == 3 && canCollide)
-        {
-            Debug.Log("Collide");
-            // Disable the fish when colliding with the cave
-            red.SetActive(false);
-            counterFish++;
-            SceneManager.LoadScene(sceneName);
-
+            elapsedTime += Time.deltaTime;
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                yield break; // Skip if Enter key is pressed
+            }
+            yield return null;
         }
     }
 
-    private IEnumerator DisableFishAndDelay() {
-        canCollide = false; // Prevent further collisions temporarily
-        yield return new WaitForSeconds(collisionDelay);
-        canCollide = true; // Allow collisions again after the delay
-    }
 }
