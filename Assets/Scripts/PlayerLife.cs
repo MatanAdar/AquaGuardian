@@ -13,12 +13,41 @@ public class PlayerLife : MonoBehaviour
     public GameObject objectToDisappear2;
     public GameObject objectToDisappear3;
 
+    public AudioClip collisionSound; // Assign this in the inspector
+    private AudioSource audioSource;
+
+    [SerializeField] GameObject healthBarObject;
+    private HealthBar healthBar; // Reference to the HealthBar component
+
+    [SerializeField] int removeWithCollide;
+
+    void Start()
+    {
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = collisionSound;
+
+        // Get the HealthBar component
+        if (healthBarObject != null)
+        {
+            healthBar = healthBarObject.GetComponent<HealthBar>();
+        }
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         if (canCollide && collision.collider.CompareTag("Cave"))
         {
             currentCollisions++; // Increment collision count
             Debug.Log("adi_colosion");
+
+            // Play collision sound
+            PlayCollisionSound();
+
+            // Add 2 health points
+            if (healthBar != null)
+            {
+                healthBar.RemoveHealthPoints(removeWithCollide);
+            }
 
             StartCoroutine(DisableObjectAndDelay(currentCollisions));
         }
@@ -41,8 +70,8 @@ public class PlayerLife : MonoBehaviour
             case 3:
                 if (objectToDisappear3 != null)
                     objectToDisappear3.SetActive(false);
-                    // Call the GameOver method after 0.2f second delay
-                    Invoke("GameOver", 0.2f);
+                // Call the GameOver method after 0.2f second delay
+                Invoke("GameOver", 0.2f);
                 break;
             default:
                 break;
@@ -55,5 +84,13 @@ public class PlayerLife : MonoBehaviour
     {
         // Load the Game Over scene
         SceneManager.LoadScene("Game_Over");
+    }
+
+    void PlayCollisionSound()
+    {
+        if (audioSource != null && collisionSound != null)
+        {
+            audioSource.Play();
+        }
     }
 }

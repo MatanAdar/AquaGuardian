@@ -1,6 +1,6 @@
+using System.Collections;
 using UnityEngine;
 using TMPro;
-using System.Collections;
 using System;
 using UnityEngine.SceneManagement;
 
@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public GameObject key3; // Reference to the key object
     private bool show = true;
     private bool afterText = false;
-    
+
 
     [SerializeField] GameObject blue;
     [SerializeField] GameObject green;
@@ -41,6 +41,12 @@ public class PlayerMovement : MonoBehaviour
     public float collisionDelay = 2f;
 
     [SerializeField] string sceneName;
+
+    [SerializeField] GameObject healthBarObject;
+    private HealthBar healthBar; // Reference to the HealthBar component
+
+    public AudioClip collisionSound; // Assign this in the inspector
+    private AudioSource audioSource;
 
     void Start()
     {
@@ -57,15 +63,23 @@ public class PlayerMovement : MonoBehaviour
             infoText5.gameObject.SetActive(false); // Hide the text initially
             infoText6.gameObject.SetActive(false); // Hide the text initially
             infoText7.gameObject.SetActive(false); // Hide the text initially
-
         }
 
-        if(key1 != null && key2 != null && key3 != null)
+        if (key1 != null && key2 != null && key3 != null)
         {
             key1.gameObject.SetActive(false);
             key2.gameObject.SetActive(false);
             key3.gameObject.SetActive(false);
         }
+
+        // Get the HealthBar component
+        if (healthBarObject != null)
+        {
+            healthBar = healthBarObject.GetComponent<HealthBar>();
+        }
+
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = collisionSound;
     }
 
     void Update()
@@ -87,12 +101,11 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(ShowInfoTextAndKeys());
 
             show = false;
-            
+
         }
 
         if (canMove && afterText)
         {
-
             // Always move the player forward
             Vector3 movementDirection = Vector3.forward; // Move along the z-axis (forward direction)
             movementDirection.Normalize();
@@ -198,4 +211,32 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        // Check if the player has collided with the oxygen object
+        if (other.CompareTag("OxygenObject"))
+        {
+            Debug.Log("Collide with oxygen");
+
+            // Play collision sound
+            PlayCollisionSound();
+
+            // Disable the oxygen object
+            other.gameObject.SetActive(false);
+
+            // Add 2 health points
+            if (healthBar != null)
+            {
+                healthBar.AddHealthPoints(2);
+            }
+        }
+    }
+
+    void PlayCollisionSound()
+    {
+        if (audioSource != null && collisionSound != null)
+        {
+            audioSource.Play();
+        }
+    }
 }

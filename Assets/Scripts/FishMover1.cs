@@ -1,147 +1,76 @@
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEngine.Rendering.DebugUI;
 
 public class FishMover1 : MonoBehaviour
 {
     [SerializeField] GameObject player;
-    [SerializeField] float verticalMoveSpeedUp;
-    [SerializeField] float verticalMoveSpeedDown;
-    public float maxOffsetUp; // Maximum offset from player's position
-    public float maxOffsetDown;
-    public float stateY;
-    bool isSpacePressed = false;
-    private bool canMove = true;
-    public float statePlaterY;
-    public GameObject Panel;
-    private float pivotUp = 7.5f;
-    private float fishKeepUpWithPlayer = 2f;
+    Vector3 lastPlayerPosition;
+    
+    Vector3 moveDirection;
+    float moveSpeed;
 
+    // Factor to reduce the speed
+    public float speedFactor = 0.5f;
 
-    public void SetMaxOffsetUp(float Up)
-    {
-        this.maxOffsetUp = Up;
-    }
-
-    Vector3 targetPosition;
+    // Smoothness factor for interpolation
+    public float smoothness = 0.5f;
 
     // Start is called before the first frame update
     void Start()
     {
-        stateY = transform.position.y;
-        statePlaterY = player.transform.position.y;
-
-
-        // Set initial target position
-        SetNewTargetPosition();
-
+        // Initialize the last player position
+        lastPlayerPosition = player.transform.position;
     }
-    // Set a new random target position within the defined range
-    void SetNewTargetPosition()
-    {
-
-
-
-        // Move the fish downwards continuously if the space key is pressed
-        if (isSpacePressed)
-        {
-            maxOffsetUp = 0f;
-            
-            MoveDown();
-        }
-        else
-        {
-            maxOffsetUp = 0f;
-            
-            // targetPosition = new Vector3(transform.position.x, transform.position.y, player.transform.position.z);
-
-            MoveUp();
-        }
-    }
-
 
     // Update is called once per frame
     void Update()
     {
+        // Calculate the movement direction and speed based on player's movement
+        CalculateMovement();
 
-        if (Panel != null)
-        {
-            canMove = !Panel.activeSelf;
-        }
-        if (canMove)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                // Set the space key pressed flag to true
-                isSpacePressed = true;
-            }
+        // Move the fish
+        MoveFish();
 
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                // Reset the space key pressed flag to false
-                isSpacePressed = false;
-            }
-            // Move towards the target position
-            float horizontalMoveSpeed = player.GetComponent<PlayerMovement>().speed;
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, fishKeepUpWithPlayer * horizontalMoveSpeed * Time.deltaTime);
-
-            // If reached the target position, set a new target position
-            if (Vector3.Distance(transform.position, targetPosition) < 0.01f) // Check distance within a threshold
-            {
-                SetNewTargetPosition();
-            }
-
-        }
-        // Check for vertical movement input
         CheckVerticalMovementInput();
-
     }
 
+    // Calculate the movement direction and speed based on player's movement
+    void CalculateMovement()
+    {
+        // Calculate movement direction
+        Vector3 currentPosition = player.transform.position;
+        Vector3 playerMovement = currentPosition - lastPlayerPosition;
+        float deltaX = playerMovement.x;
+        float deltaY = playerMovement.y;
+        float deltaZ = playerMovement.z;
 
+        // Calculate movement speed (magnitude of the direction vector)
+        moveSpeed = playerMovement.magnitude / Time.deltaTime * speedFactor;
+
+        // Update the last player position
+        lastPlayerPosition = currentPosition;
+    }
+
+    // Move the fish
+    void MoveFish()
+    {
+        // Smoothly interpolate between the current position and the new position
+        Vector3 targetPosition = new Vector3(transform.position.x, transform.position.y, player.transform.position.z) + moveDirection.normalized * moveSpeed * Time.deltaTime;
+        transform.position = Vector3.Lerp(transform.position, targetPosition, smoothness * Time.deltaTime);
+    }
 
     // Check for vertical movement input
     void CheckVerticalMovementInput()
     {
-
-        // Move down when 'G' is pressed
+        // Check for 'G' key press to move down
         if (Input.GetKeyDown(KeyCode.G))
         {
-            MoveDown();
+            transform.Translate(Vector3.down);
         }
 
-        // Move up when 'T' is pressed
+        // Check for 'Y' key press to move up
         if (Input.GetKeyDown(KeyCode.T))
         {
-            MoveUp();
+            transform.Translate(Vector3.up);
         }
     }
-
-    // Move the fish down
-    void MoveDown()
-    {
-        targetPosition = new Vector3(transform.position.x, transform.position.y - verticalMoveSpeedDown, player.transform.position.z);
-    }
-
-    // Move the fish up
-    void MoveUp()
-    {
-        targetPosition = new Vector3(transform.position.x, Mathf.Min(player.transform.position.y+ pivotUp, transform.position.y + verticalMoveSpeedUp), player.transform.position.z); ;
-    }
-
-
-    // Collison with cave
-    void OnCollisionEnter(Collision collision)
-    {
-        // Check if the player has collided with the cave
-        if (collision.collider.CompareTag("Cave"))
-        {
-            Debug.Log("Collide");
-            // Disable the fish when colliding with the cave
-            gameObject.SetActive(false);
-
-        }
-    }
-
 }

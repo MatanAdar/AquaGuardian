@@ -10,6 +10,7 @@ public class PanelOpenUp : MonoBehaviour
     public GameObject Panel;
     [SerializeField] public float maxSliderAmount = 5.0f;
     [SerializeField] public GameObject objectToScale = null;
+    [SerializeField] public GameObject oxygenObject = null;
     [SerializeField] public GameObject chest = null;
     [SerializeField] public TextMeshProUGUI num_of_caves_Text = null;
     public float num_caves_from_user = 0;
@@ -41,12 +42,16 @@ public class PanelOpenUp : MonoBehaviour
             Panel.SetActive(false);
             Debug.Log("num_caves_from_user in ClosePanel: " + num_caves_from_user);
             Vector3 currentPosition = objectToScale.transform.position;
+            Vector3 currentPositionOxygen = oxygenObject.transform.position;
             Vector3 newPosition = new Vector3(currentPosition.x,currentPosition.y,currentPosition.z);
+            Vector3 newOxygenPosition = new Vector3(currentPositionOxygen.x, currentPositionOxygen.y, currentPositionOxygen.z);
 
             for (int i = 1; i <= num_caves_from_user; i++)
             {
                 newPosition = new Vector3(currentPosition.x, currentPosition.y, currentPosition.z - (pivotPlace * i));
+                newOxygenPosition = new Vector3(currentPositionOxygen.x, currentPositionOxygen.y, currentPositionOxygen.z - (pivotPlace * i));
                 GameObject newObject = Instantiate(objectToScale, newPosition, Quaternion.identity);
+                GameObject newOxygenObject = Instantiate(oxygenObject, newOxygenPosition, Quaternion.identity);
             }
 
             
