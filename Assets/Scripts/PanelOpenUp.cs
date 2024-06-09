@@ -92,28 +92,39 @@ public class PanelOpenUp : MonoBehaviour
             Vector3 newScale = new Vector3(currentScale.x, currentScale.y, currentScale.z);
 
             //Category
-            for (int j=1; j<=1; j++)
+
+            int j = 1;
+
+            //For each row
+            for (int i = 1; i <= numOfLines; i++)
             {
-                string[] fields = lines[j].Split(',');
+                string[] fields = lines[i].Split(',');
 
-                //For each row
-                for (int i = 1; i <= numOfLines; i++)
-                {
-                    newPosition = new Vector3(currentPosition.x, currentPosition.y, currentPosition.z - (pivotPlace * i));
+                // Height
+                float valueY = float.Parse(fields[1]);
+                Debug.Log("Y of cave " + i +" from file: " + valueY);
+           
 
-                    float valueY = float.Parse(fields[i]);
-                    Debug.Log("Y from file: " + valueY);
-                    newScale = new Vector3(newScale.x, valueY, newScale.z);
+                // Diameter
+                float posY = float.Parse(fields[2]);
+                Debug.Log("posY of cave " + i +" from file: " + posY);
 
-                    newOxygenPosition = new Vector3(currentPositionOxygen.x, currentPositionOxygen.y, currentPositionOxygen.z - (pivotPlace * i));
+                // Length
+                float valueZ = float.Parse(fields[3]);
+                Debug.Log("Z of cave " + i +" from file: " + valueZ);
 
-                    //instantiate objects
-                    GameObject newObject = Instantiate(objectToScale, newPosition, Quaternion.identity);
-                    newObject.transform.localScale = newScale;
-                    GameObject newOxygenObject = Instantiate(oxygenObject, newOxygenPosition, Quaternion.identity);
-                }
+
+                newScale = new Vector3(newScale.x, valueY, valueZ);
+
+                newPosition = new Vector3(currentPosition.x, currentPosition.y + 20, currentPosition.z - (pivotPlace * i));
+
+                newOxygenPosition = new Vector3(currentPositionOxygen.x, currentPositionOxygen.y, currentPositionOxygen.z - (pivotPlace * i));
+
+                //instantiate objects
+                GameObject newObject = Instantiate(objectToScale, newPosition, Quaternion.identity);
+                newObject.transform.localScale = newScale;
+                GameObject newOxygenObject = Instantiate(oxygenObject, newOxygenPosition, Quaternion.identity);
             }
-
             
             Vector3 newPosition_chest = new Vector3(chestX, chestY, newPosition.z - (pivotPlace));
 
