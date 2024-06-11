@@ -1,259 +1,76 @@
 using UnityEngine;
-using TMPro;
 
 public class FishMover2 : MonoBehaviour
 {
     [SerializeField] GameObject player;
-    [SerializeField] float verticalMoveSpeedUp;
-    [SerializeField] float verticalMoveSpeedDown;
-    public float maxOffsetUp; // Maximum offset from player's position
-    public float maxOffsetDown;
-    public float stateY;
-    bool isSpacePressed = false;
-    private bool canMove = true;
-    public float statePlaterY;
-    public GameObject Panel;
-    private float pivotUp = 7f;
-    private float fishKeepUpWithPlayer = 2f;
-    private float pivot = 2f;
-    private float minFontSize = 40f;
-    private float maxFontSize = 80f;
-    private float fontSizeIncrement = 5f;
+    Vector3 lastPlayerPosition;
 
-    [SerializeField] public TextMeshProUGUI ButtonToPressUp; // Reference to the text object
-    [SerializeField] public TextMeshProUGUI ButtonToPressDown; // Reference to the text object
+    Vector3 moveDirection;
+    float moveSpeed;
 
-    public void SetMaxOffsetUp(float Up)
-    {
-        this.maxOffsetUp = Up;
-    }
+    // Factor to reduce the speed
+    public float speedFactor = 0.5f;
 
-    Vector3 targetPosition;
+    // Smoothness factor for interpolation
+    public float smoothness = 0.5f;
 
     // Start is called before the first frame update
     void Start()
     {
-        stateY = transform.position.y;
-        statePlaterY = player.transform.position.y;
-
-        if (ButtonToPressUp != null && ButtonToPressDown != null)
-        {
-            ButtonToPressUp.gameObject.SetActive(false); // Hide the text initially
-            ButtonToPressDown.gameObject.SetActive(false); // Hide the text initially
-        }
-
-        // Offset the text positions
-        if (ButtonToPressUp != null)
-        {
-            Vector3 upTextPosition = transform.position + new Vector3(0f, 1f, 0f); // Offset up by 1 unit
-            ButtonToPressUp.rectTransform.position = Camera.main.WorldToScreenPoint(upTextPosition);
-        }
-
-        if (ButtonToPressDown != null)
-        {
-            Vector3 downTextPosition = transform.position - new Vector3(0f, 1f, 0f); // Offset down by 1 unit
-            ButtonToPressDown.rectTransform.position = Camera.main.WorldToScreenPoint(downTextPosition);
-        }
-
-
-        // Set initial target position
-        SetNewTargetPosition();
-
+        // Initialize the last player position
+        lastPlayerPosition = player.transform.position;
     }
 
-    // Set a new random target position within the defined range
-    void SetNewTargetPosition()
-    {
-        if (canMove && isSpacePressed) // Only move if canMove is true and the space key is pressed
-        {
-            maxOffsetUp = 0f;
-            MoveDown();
-        }
-        else if (canMove && !isSpacePressed) // Only move if canMove is true and the space key is not pressed
-        {
-            maxOffsetUp = 0f;
-            MoveUp();
-        }
-    }
-
-
-    // Update is called once per frame
     // Update is called once per frame
     void Update()
     {
-        if (Panel != null)
-        {
-            canMove = !Panel.activeSelf;
-        }
+        // Calculate the movement direction and speed based on player's movement
+        CalculateMovement();
 
-        // Check if canMove is true and the player is moving (pressing space)
-        if (canMove && isSpacePressed)
-        {
-            // Move towards the target position
-            float horizontalMoveSpeed = player.GetComponent<PlayerMovement>().speed;
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, fishKeepUpWithPlayer * horizontalMoveSpeed * Time.deltaTime);
+        // Move the fish
+        MoveFish();
 
-            // Toggle text visibility based on fish position
-            if (gameObject.activeInHierarchy)
-            {
-                if (gameObject.transform.position.y - pivot < player.transform.position.y)
-                {
-                    ButtonToPressDown.gameObject.SetActive(false);
-                    ButtonToPressUp.gameObject.SetActive(true);
-                    Vector3 upTextPosition = transform.position + new Vector3(0f, fishKeepUpWithPlayer * horizontalMoveSpeed * Time.deltaTime, 0f); // Offset up by 1 unit
-                    ButtonToPressUp.rectTransform.position = Camera.main.WorldToScreenPoint(upTextPosition);
-                }
-                else if (gameObject.transform.position.y + pivot > player.transform.position.y)
-                {
-                    ButtonToPressUp.gameObject.SetActive(false);
-                    ButtonToPressDown.gameObject.SetActive(true);
-                    Vector3 downTextPosition = transform.position - new Vector3(0f, fishKeepUpWithPlayer * horizontalMoveSpeed * Time.deltaTime, 0f); // Offset down by 1 unit
-                    ButtonToPressDown.rectTransform.position = Camera.main.WorldToScreenPoint(downTextPosition);
-                }
-
-                // Calculate the distance between the fish and the player along the Y-axis
-                float distanceToPlayer = Mathf.Abs(transform.position.y - player.transform.position.y);
-
-                // Adjust font size based on the distance
-                AdjustTextSize(distanceToPlayer);
-            }
-            else
-            {
-                // Fish is inactive, hide the text
-                HideText();
-            }
-
-            // If reached the target position, set a new target position
-            if (Vector3.Distance(transform.position, targetPosition) < 0.01f) // Check distance within a threshold
-            {
-                SetNewTargetPosition();
-            }
-        }
-        else if (canMove && !isSpacePressed) // Fish should move up if space is not pressed
-        {
-            // Move towards the target position
-            float horizontalMoveSpeed = player.GetComponent<PlayerMovement>().speed;
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, fishKeepUpWithPlayer * horizontalMoveSpeed * Time.deltaTime);
-
-            // Toggle text visibility based on fish position
-            if (gameObject.activeInHierarchy)
-            {
-                if (gameObject.transform.position.y - pivot < player.transform.position.y)
-                {
-                    ButtonToPressDown.gameObject.SetActive(false);
-                    ButtonToPressUp.gameObject.SetActive(true);
-                    Vector3 upTextPosition = transform.position + new Vector3(0f, fishKeepUpWithPlayer * horizontalMoveSpeed * Time.deltaTime, 0f); // Offset up by 1 unit
-                    ButtonToPressUp.rectTransform.position = Camera.main.WorldToScreenPoint(upTextPosition);
-                }
-                else if (gameObject.transform.position.y + pivot > player.transform.position.y)
-                {
-                    ButtonToPressUp.gameObject.SetActive(false);
-                    ButtonToPressDown.gameObject.SetActive(true);
-                    Vector3 downTextPosition = transform.position - new Vector3(0f, fishKeepUpWithPlayer * horizontalMoveSpeed * Time.deltaTime, 0f); // Offset down by 1 unit
-                    ButtonToPressDown.rectTransform.position = Camera.main.WorldToScreenPoint(downTextPosition);
-                }
-
-                // Calculate the distance between the fish and the player along the Y-axis
-                float distanceToPlayer = Mathf.Abs(transform.position.y - player.transform.position.y);
-
-                // Adjust font size based on the distance
-                AdjustTextSize(distanceToPlayer);
-            }
-            else
-            {
-                // Fish is inactive, hide the text
-                HideText();
-            }
-
-            // If reached the target position, set a new target position
-            if (Vector3.Distance(transform.position, targetPosition) < 0.01f) // Check distance within a threshold
-            {
-                SetNewTargetPosition();
-            }
-        }
-
-        // Check for vertical movement input
         CheckVerticalMovementInput();
     }
 
+    // Calculate the movement direction and speed based on player's movement
+    void CalculateMovement()
+    {
+        // Calculate movement direction
+        Vector3 currentPosition = player.transform.position;
+        Vector3 playerMovement = currentPosition - lastPlayerPosition;
+        float deltaX = playerMovement.x;
+        float deltaY = playerMovement.y;
+        float deltaZ = playerMovement.z;
+
+        // Calculate movement speed (magnitude of the direction vector)
+        moveSpeed = playerMovement.magnitude / Time.deltaTime * speedFactor;
+
+        // Update the last player position
+        lastPlayerPosition = currentPosition;
+    }
+
+    // Move the fish
+    void MoveFish()
+    {
+        // Smoothly interpolate between the current position and the new position
+        Vector3 targetPosition = new Vector3(transform.position.x, transform.position.y, player.transform.position.z) + moveDirection.normalized * moveSpeed * Time.deltaTime;
+        transform.position = Vector3.Lerp(transform.position, targetPosition, smoothness * Time.deltaTime);
+    }
 
     // Check for vertical movement input
     void CheckVerticalMovementInput()
     {
-        // Move down when 'H' is pressed
+        // Check for 'G' key press to move down
         if (Input.GetKeyDown(KeyCode.H))
         {
-            MoveDown();
+            transform.Translate(Vector3.down);
         }
 
-        // Move up when 'Y' is pressed
+        // Check for 'Y' key press to move up
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            MoveUp();
-        }
-    }
-
-    // Move the fish down
-    void MoveDown()
-    {
-        targetPosition = new Vector3(transform.position.x, transform.position.y - verticalMoveSpeedDown, player.transform.position.z);
-    }
-
-    // Move the fish up
-    void MoveUp()
-    {
-        targetPosition = new Vector3(transform.position.x, Mathf.Min(player.transform.position.y + pivotUp, transform.position.y + verticalMoveSpeedUp), player.transform.position.z); ;
-    }
-
-    // Hide the text objects
-    void HideText()
-    {
-        ButtonToPressDown.gameObject.SetActive(false);
-        ButtonToPressUp.gameObject.SetActive(false);
-    }
-
-    // Show the text objects
-    void ShowText()
-    {
-        ButtonToPressDown.gameObject.SetActive(true);
-        ButtonToPressUp.gameObject.SetActive(true);
-    }
-
-    // Adjust text size based on the distance between fish and player
-    void AdjustTextSize(float distanceToPlayer)
-    {
-        // Calculate font size based on distance
-        float fontSize = minFontSize + (distanceToPlayer * fontSizeIncrement);
-
-        // Clamp font size between min and max values
-        fontSize = Mathf.Clamp(fontSize, minFontSize, maxFontSize);
-
-        // Apply the calculated font size to the text objects
-        ButtonToPressUp.fontSize = fontSize;
-        ButtonToPressDown.fontSize = fontSize;
-    }
-
-    // Handle visibility of text when the fish becomes active
-    void OnEnable()
-    {
-        ShowText();
-    }
-
-    // Handle visibility of text when the fish becomes inactive
-    void OnDisable()
-    {
-        HideText();
-    }
-
-    // Collision with cave
-    void OnCollisionEnter(Collision collision)
-    {
-        // Check if the player has collided with the cave
-        if (collision.collider.CompareTag("Cave"))
-        {
-            Debug.Log("Collide");
-            // Disable the fish when colliding with the cave
-            gameObject.SetActive(false);
+            transform.Translate(Vector3.up);
         }
     }
 }

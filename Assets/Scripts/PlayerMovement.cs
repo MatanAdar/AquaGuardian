@@ -144,6 +144,7 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator ShowInfoTextAndKeys()
     {
+
         if (key1 != null && key2 != null && key3 != null)
         {
             key1.gameObject.SetActive(true);
@@ -153,19 +154,19 @@ public class PlayerMovement : MonoBehaviour
 
         if (infoText1 != null && infoText2 != null && infoText3 != null && infoText4 != null && infoText5 != null && infoText6 != null && infoText7 != null)
         {
-            infoText1.gameObject.SetActive(true); // Show the text
+            /*infoText1.gameObject.SetActive(true); // Show the text
             yield return WaitForSecondsOrSkip(3f); // Wait for 3 seconds or skip if Enter is pressed
             infoText1.gameObject.SetActive(false); // Hide the text after 3 seconds
 
-            yield return WaitForSecondsOrSkip(1f); // Wait for 1 second or skip if Enter is pressed
+            yield return WaitForSecondsOrSkip(1f); // Wait for 1 second or skip if Enter is pressed*/
 
-            infoText2.gameObject.SetActive(true); // Show the text
+            /*infoText2.gameObject.SetActive(true); // Show the text
             yield return WaitForSecondsOrSkip(4f); // Wait for 4 seconds or skip if Enter is pressed
             infoText2.gameObject.SetActive(false); // Hide the text after 4 seconds
 
-            yield return WaitForSecondsOrSkip(1f); // Wait for 1 second or skip if Enter is pressed
+            yield return WaitForSecondsOrSkip(1f); // Wait for 1 second or skip if Enter is pressed*/
 
-            infoText3.gameObject.SetActive(true); // Show the text
+            /*infoText3.gameObject.SetActive(true); // Show the text
             yield return WaitForSecondsOrSkip(4f); // Wait for 4 seconds or skip if Enter is pressed
             infoText3.gameObject.SetActive(false); // Hide the text after 4 seconds
 
@@ -181,7 +182,7 @@ public class PlayerMovement : MonoBehaviour
             yield return WaitForSecondsOrSkip(4f); // Wait for 4 seconds or skip if Enter is pressed
             infoText5.gameObject.SetActive(false); // Hide the text after 4 seconds
 
-            yield return WaitForSecondsOrSkip(1f); // Wait for 1 second or skip if Enter is pressed
+            yield return WaitForSecondsOrSkip(1f); // Wait for 1 second or skip if Enter is pressed*/
 
             infoText6.gameObject.SetActive(true); // Show the text
             yield return WaitForSecondsOrSkip(1f); // Wait for 1 second or skip if Enter is pressed

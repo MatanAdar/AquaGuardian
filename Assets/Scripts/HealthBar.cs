@@ -19,6 +19,9 @@ public class HealthBar : MonoBehaviour
 
     [SerializeField] public float lifeTime;
 
+    public GameObject Panel;
+    private bool moveOxygen = false; // Set to true by default
+
     private void Start()
     {
         // Initialize the healthPointStates array
@@ -28,13 +31,24 @@ public class HealthBar : MonoBehaviour
             healthPointStates[i] = true; // All points start as visible
         }
 
-        // Start the coroutine to make health points disappear
-        StartCoroutine(DisappearHealthPoints());
+        // Check if the panel is initially closed and start the coroutine if it is
+        if (Panel != null && !Panel.activeSelf)
+        {
+            moveOxygen = true;
+            StartCoroutine(DisappearHealthPoints());
+        }
     }
 
     private void Update()
     {
         healthBarFiller();
+
+        // Start the coroutine when the panel is closed
+        if (Panel != null && !Panel.activeSelf && !moveOxygen)
+        {
+            moveOxygen = true;
+            StartCoroutine(DisappearHealthPoints());
+        }
     }
 
     bool DisplayHealthPoint(float _health, int pointNumber)
@@ -62,7 +76,7 @@ public class HealthBar : MonoBehaviour
             yield return new WaitForSeconds(lifeTime); // Wait for the specified lifetime
             healthPoints[healthPoints.Length - counter + 1].enabled = false; // Disable the health point image
             healthPointStates[healthPoints.Length - counter + 1] = false; // Mark this health point as disappeared
-            
+
             counter--;
 
             i = healthPoints.Length - counter + 1;

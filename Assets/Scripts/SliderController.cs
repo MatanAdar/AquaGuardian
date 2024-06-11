@@ -20,7 +20,7 @@ public class SliderController : MonoBehaviour
     // [SerializeField] private float maxPosition_Z = 1100f; // Maximum position of the object in the Z-axis
 
     private float lerpA_scaleY = 0.35f;
-    private float lerpA_posY = 27.17202f;
+    private float lerpA_posY = -53.82798f;
     private float lerpA_scaleZ = 0.5f;
 
 

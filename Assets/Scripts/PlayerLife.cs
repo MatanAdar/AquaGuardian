@@ -9,9 +9,14 @@ public class PlayerLife : MonoBehaviour
     private bool canCollide = true; // Flag to control collision timing
     private float waitTime = 2f;
 
-    public GameObject objectToDisappear1;
+    /*public GameObject objectToDisappear1;
     public GameObject objectToDisappear2;
-    public GameObject objectToDisappear3;
+    public GameObject objectToDisappear3;*/
+
+    [SerializeField] GameObject fish1;
+    [SerializeField] GameObject fish2;
+    [SerializeField] GameObject fish3;
+    [SerializeField] GameObject fish4;
 
     public AudioClip collisionSound; // Assign this in the inspector
     private AudioSource audioSource;
@@ -20,6 +25,8 @@ public class PlayerLife : MonoBehaviour
     private HealthBar healthBar; // Reference to the HealthBar component
 
     [SerializeField] int removeWithCollide;
+
+    float distance = 0;
 
     void Start()
     {
@@ -31,29 +38,69 @@ public class PlayerLife : MonoBehaviour
         {
             healthBar = healthBarObject.GetComponent<HealthBar>();
         }
+
+        distance = gameObject.transform.position.z - fish1.transform.position.z;
+    }
+
+    private void Update()
+    {
+        float currentDistance = gameObject.transform.position.z - fish1.transform.position.z;
+        if (distance != currentDistance)
+        {
+            Vector3 newPosition1 = fish1.transform.position;
+            Vector3 newPosition2 = fish2.transform.position;
+            Vector3 newPosition3 = fish3.transform.position;
+            Vector3 newPosition4 = fish4.transform.position;
+            
+            newPosition1.z = gameObject.transform.position.z - distance;
+            newPosition2.z = gameObject.transform.position.z - distance;
+            newPosition3.z = gameObject.transform.position.z - distance;
+            newPosition4.z = gameObject.transform.position.z - distance;
+
+            fish1.transform.position = newPosition1;
+            fish2.transform.position = newPosition2;
+            fish3.transform.position = newPosition3;
+            fish4.transform.position = newPosition4;
+        }
     }
 
     void OnCollisionEnter(Collision collision)
     {
         if (canCollide && collision.collider.CompareTag("Cave"))
         {
-            currentCollisions++; // Increment collision count
-            Debug.Log("adi_colosion");
-
-            // Play collision sound
-            PlayCollisionSound();
-
-            // Add 2 health points
-            if (healthBar != null)
-            {
-                healthBar.RemoveHealthPoints(removeWithCollide);
-            }
-
-            StartCoroutine(DisableObjectAndDelay(currentCollisions));
+            HandleCollision();
         }
     }
 
-    IEnumerator DisableObjectAndDelay(int collisions)
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Cave"))
+        {
+            if (other.gameObject == fish1 || other.gameObject == fish2 || other.gameObject == fish3 || other.gameObject == fish4)
+            {
+                HandleCollision();
+            }
+        }
+    }
+
+    private void HandleCollision()
+    {
+        currentCollisions++; // Increment collision count
+        Debug.Log("adi_colosion");
+
+        // Play collision sound
+        PlayCollisionSound();
+
+        // Remove health points
+        if (healthBar != null)
+        {
+            healthBar.RemoveHealthPoints(removeWithCollide);
+        }
+
+        /*StartCoroutine(DisableObjectAndDelay(currentCollisions));*/
+    }
+
+/*    IEnumerator DisableObjectAndDelay(int collisions)
     {
         canCollide = false; // Disable collision temporarily
         // Determine which object to disappear based on currentCollisions value
@@ -78,7 +125,7 @@ public class PlayerLife : MonoBehaviour
         }
         yield return new WaitForSeconds(waitTime); // Wait for 2 seconds
         canCollide = true; // Enable collision after delay
-    }
+    }*/
 
     void GameOver()
     {

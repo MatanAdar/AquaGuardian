@@ -15,7 +15,9 @@ public class PanelOpenUp : MonoBehaviour
     [SerializeField] public TextMeshProUGUI num_of_caves_Text = null;
     public float num_caves_from_user = 0;
     [SerializeField] public Slider slider;
-    private int pivotPlace = 50;
+    private int pivotPlace = 90;
+    private int pivotChest = 75;
+    private int pivotOxygen = 100;
     private float chestX = 291.774f;
     private float chestY = 20.002f;
 
@@ -91,21 +93,17 @@ public class PanelOpenUp : MonoBehaviour
             Vector3 currentScale = objectToScale.transform.localScale;
             Vector3 newScale = new Vector3(currentScale.x, currentScale.y, currentScale.z);
 
-            //Category
-
-            int j = 1;
-
             //For each row
-            for (int i = 1; i <= numOfLines; i++)
+            for (int i = 1; i < numOfLines; i++)
             {
                 string[] fields = lines[i].Split(',');
 
-                // Height
+                // Diameter
                 float valueY = float.Parse(fields[1]);
                 Debug.Log("Y of cave " + i +" from file: " + valueY);
            
 
-                // Diameter
+                // Height
                 float posY = float.Parse(fields[2]);
                 Debug.Log("posY of cave " + i +" from file: " + posY);
 
@@ -116,17 +114,18 @@ public class PanelOpenUp : MonoBehaviour
 
                 newScale = new Vector3(newScale.x, valueY, valueZ);
 
-                newPosition = new Vector3(currentPosition.x, currentPosition.y + 20, currentPosition.z - (pivotPlace * i));
+                newPosition = new Vector3(currentPosition.x, currentPosition.y + posY, currentPosition.z - (pivotPlace * i));
 
-                newOxygenPosition = new Vector3(currentPositionOxygen.x, currentPositionOxygen.y, currentPositionOxygen.z - (pivotPlace * i));
+                newOxygenPosition = new Vector3(currentPositionOxygen.x, currentPositionOxygen.y, currentPositionOxygen.z - (pivotOxygen * i));
 
                 //instantiate objects
                 GameObject newObject = Instantiate(objectToScale, newPosition, Quaternion.identity);
                 newObject.transform.localScale = newScale;
                 GameObject newOxygenObject = Instantiate(oxygenObject, newOxygenPosition, Quaternion.identity);
             }
-            
-            Vector3 newPosition_chest = new Vector3(chestX, chestY, newPosition.z - (pivotPlace));
+
+            //instantiate chest
+            Vector3 newPosition_chest = new Vector3(chestX, chestY, newPosition.z - (pivotChest));
 
             GameObject newObject_chest = Instantiate(chest, newPosition_chest, Quaternion.identity);
 

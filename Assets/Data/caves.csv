@@ -1,5 +1,5 @@
-﻿cave ,cave height,cave diameter,cave length
-1,2,1,0.5
-2,2,2,0.2
-3,2,3,0.1
-4,4,4,0.9
+﻿cave ,cave diameter(0.2-0.8),cave height(0-25),cave length(0.2-1)
+1,0.2,5,1
+2,0.3,10,0.8
+3,0.5,15,0.7
+4,0.8,25,1.2
