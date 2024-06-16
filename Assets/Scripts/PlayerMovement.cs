@@ -23,9 +23,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public TextMeshProUGUI infoText6; // Reference to the text object
     [SerializeField] public TextMeshProUGUI infoText7; // Reference to the text object
 
-    [SerializeField] public GameObject key1; // Reference to the key object
+    /*[SerializeField] public GameObject key1; // Reference to the key object
     [SerializeField] public GameObject key2; // Reference to the key object
-    [SerializeField] public GameObject key3; // Reference to the key object
+    [SerializeField] public GameObject key3; // Reference to the key object*/
+
     private bool show = true;
     private bool afterText = false;
 
@@ -65,12 +66,12 @@ public class PlayerMovement : MonoBehaviour
             infoText7.gameObject.SetActive(false); // Hide the text initially
         }
 
-        if (key1 != null && key2 != null && key3 != null)
+        /*if (key1 != null && key2 != null && key3 != null)
         {
             key1.gameObject.SetActive(false);
             key2.gameObject.SetActive(false);
             key3.gameObject.SetActive(false);
-        }
+        }*/
 
         // Get the HealthBar component
         if (healthBarObject != null)
@@ -145,12 +146,12 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator ShowInfoTextAndKeys()
     {
 
-        if (key1 != null && key2 != null && key3 != null)
+        /*if (key1 != null && key2 != null && key3 != null)
         {
             key1.gameObject.SetActive(true);
             key2.gameObject.SetActive(true);
             key3.gameObject.SetActive(true);
-        }
+        }*/
 
         if (infoText1 != null && infoText2 != null && infoText3 != null && infoText4 != null && infoText5 != null && infoText6 != null && infoText7 != null)
         {

@@ -9,6 +9,15 @@ public class PlayerLife : MonoBehaviour
     private bool canCollide = true; // Flag to control collision timing
     private float waitTime = 2f;
 
+    private bool PlayerisCollide = false;
+    float PlayerPositionX;
+    float PlayerPositionY;
+
+    [SerializeField] public GameObject TopOfCave = null;
+    [SerializeField] public GameObject BottomOfCave = null;
+
+    float pivotToCaveCenter = 8f;
+
     /*public GameObject objectToDisappear1;
     public GameObject objectToDisappear2;
     public GameObject objectToDisappear3;*/
@@ -30,6 +39,9 @@ public class PlayerLife : MonoBehaviour
 
     void Start()
     {
+        PlayerPositionX= gameObject.transform.position.x;
+        PlayerPositionY= (TopOfCave.transform.position.y + BottomOfCave.transform.position.y)/2;
+
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.clip = collisionSound;
 
@@ -62,12 +74,21 @@ public class PlayerLife : MonoBehaviour
             fish3.transform.position = newPosition3;
             fish4.transform.position = newPosition4;
         }
+
+        if (PlayerisCollide)
+        {
+            gameObject.transform.position = new Vector3(PlayerPositionX,PlayerPositionY,gameObject.transform.position.z);
+
+            PlayerisCollide = false;
+        }
     }
 
     void OnCollisionEnter(Collision collision)
     {
         if (canCollide && collision.collider.CompareTag("Cave"))
         {
+            PlayerisCollide = true;
+
             HandleCollision();
         }
     }
