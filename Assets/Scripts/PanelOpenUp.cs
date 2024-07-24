@@ -11,11 +11,13 @@ public class PanelOpenUp : MonoBehaviour
     [SerializeField] public float maxSliderAmount = 5.0f;
     [SerializeField] public GameObject objectToScale = null;
     [SerializeField] public GameObject oxygenObject = null;
+    [SerializeField] public GameObject wall = null;
+    [SerializeField] public GameObject arrows = null;
     [SerializeField] public GameObject chest = null;
     [SerializeField] public TextMeshProUGUI num_of_caves_Text = null;
     public float num_caves_from_user = 0;
     [SerializeField] public Slider slider;
-    private int pivotPlace = 90;
+    private int pivotPlace = 120;
     private int pivotChest = 75;
     private int pivotOxygen = 100;
     private float chestX = 291.774f;
@@ -87,8 +89,12 @@ public class PanelOpenUp : MonoBehaviour
             Debug.Log("num_caves_from_user in ClosePanel: " + numOfLines);
             Vector3 currentPosition = objectToScale.transform.position;
             Vector3 currentPositionOxygen = oxygenObject.transform.position;
+            Vector3 currentPositionWall = wall.transform.position;
+            Vector3 currentPositionArrows = arrows.transform.position;
             Vector3 newPosition = new Vector3(currentPosition.x,currentPosition.y,currentPosition.z);
             Vector3 newOxygenPosition = new Vector3(currentPositionOxygen.x, currentPositionOxygen.y, currentPositionOxygen.z);
+            Vector3 newWallPosition = new Vector3(currentPositionWall.x, currentPositionWall.y, currentPositionWall.z);
+            Vector3 newArrowsPosition = new Vector3(currentPositionArrows.x, currentPositionArrows.y, currentPositionArrows.z);
 
             Vector3 currentScale = objectToScale.transform.localScale;
             Vector3 newScale = new Vector3(currentScale.x, currentScale.y, currentScale.z);
@@ -111,17 +117,42 @@ public class PanelOpenUp : MonoBehaviour
                 float valueZ = float.Parse(fields[3]);
                 Debug.Log("Z of cave " + i +" from file: " + valueZ);
 
+                float valueZnext = valueZ;
+
+                if (i < numOfLines - 1) {
+                    string[] fieldsNext = lines[i+1].Split(',');
+                    valueZnext = float.Parse(fieldsNext[3]);
+                }
+
 
                 newScale = new Vector3(newScale.x, valueY, valueZ);
 
-                newPosition = new Vector3(currentPosition.x, currentPosition.y + posY, currentPosition.z - (pivotPlace * i));
+                Debug.Log("current cave position: " + currentPosition.x + " " + currentPosition.y + " " + currentPosition.z);
+                
+                newPosition = new Vector3(currentPosition.x, currentPosition.y + posY, currentPositionWall.z - 70);
 
-                newOxygenPosition = new Vector3(currentPositionOxygen.x, currentPositionOxygen.y, currentPositionOxygen.z - (pivotOxygen * i));
+                currentPosition = new Vector3(currentPosition.x,currentPosition.y,newPosition.z);
+
+                Debug.Log( i +" current cave position: " + currentPosition.x + " " + currentPosition.y + " " + currentPosition.z);
 
                 //instantiate objects
                 GameObject newObject = Instantiate(objectToScale, newPosition, Quaternion.identity);
                 newObject.transform.localScale = newScale;
+
+                newOxygenPosition = new Vector3(currentPositionOxygen.x, currentPositionOxygen.y, currentPosition.z - 50);
+
+                newWallPosition = new Vector3(currentPositionWall.x, currentPositionWall.y, currentPosition.z - 50);
+
+                currentPositionWall = new Vector3(currentPositionWall.x , currentPositionWall.y , newWallPosition.z);
+
+                newArrowsPosition = new Vector3(currentPositionArrows.x, currentPositionArrows.y, currentPosition.z - 50);
+
+                //instantiate objects
+                /*GameObject newObject = Instantiate(objectToScale, newPosition, Quaternion.identity);
+                newObject.transform.localScale = newScale;*/
                 GameObject newOxygenObject = Instantiate(oxygenObject, newOxygenPosition, Quaternion.identity);
+                GameObject newWallObject = Instantiate(wall, newWallPosition, Quaternion.identity);
+                GameObject newArrowsObject = Instantiate(arrows, newArrowsPosition, Quaternion.identity);
             }
 
             //instantiate chest

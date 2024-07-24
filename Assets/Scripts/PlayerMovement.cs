@@ -43,8 +43,13 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] string sceneName;
 
-    [SerializeField] GameObject healthBarObject;
-    private HealthBar healthBar; // Reference to the HealthBar component
+    /*[SerializeField] GameObject healthBarObject;
+    private HealthBar healthBar; // Reference to the HealthBar component*/
+
+    [SerializeField] GameObject healthBarObject2;
+    private Health healthBar2; // Reference to the HealthBar component
+    [SerializeField] float healHealthPoint;
+
 
     public AudioClip collisionSound; // Assign this in the inspector
     private AudioSource audioSource;
@@ -74,9 +79,9 @@ public class PlayerMovement : MonoBehaviour
         }*/
 
         // Get the HealthBar component
-        if (healthBarObject != null)
+        if (healthBarObject2 != null)
         {
-            healthBar = healthBarObject.GetComponent<HealthBar>();
+            healthBar2 = healthBarObject2.GetComponent<Health>();
         }
 
         audioSource = gameObject.AddComponent<AudioSource>();
@@ -226,10 +231,16 @@ public class PlayerMovement : MonoBehaviour
             // Disable the oxygen object
             other.gameObject.SetActive(false);
 
-            // Add 2 health points
+            /*// Add 2 health points
             if (healthBar != null)
             {
                 healthBar.AddHealthPoints(2);
+            }*/
+
+            // Add 2 health points
+            if (healthBar2 != null)
+            {
+                healthBar2.heal(healHealthPoint);
             }
         }
     }

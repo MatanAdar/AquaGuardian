@@ -30,10 +30,17 @@ public class PlayerLife : MonoBehaviour
     public AudioClip collisionSound; // Assign this in the inspector
     private AudioSource audioSource;
 
-    [SerializeField] GameObject healthBarObject;
-    private HealthBar healthBar; // Reference to the HealthBar component
+    /*[SerializeField] GameObject healthBarObject;
+    private HealthBar healthBar; // Reference to the HealthBar component*/
 
-    [SerializeField] int removeWithCollide;
+    [SerializeField] GameObject healthBarObject2;
+    private Health healthBar2; // Reference to the HealthBar component
+
+    [SerializeField] int removeHealthWithCollide;
+
+    [SerializeField] int removeHealthFishCollide;
+
+    [SerializeField] int timeBetweenCollides;
 
     float distance = 0;
 
@@ -45,10 +52,16 @@ public class PlayerLife : MonoBehaviour
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.clip = collisionSound;
 
-        // Get the HealthBar component
+        /*// Get the HealthBar component
         if (healthBarObject != null)
         {
             healthBar = healthBarObject.GetComponent<HealthBar>();
+        }*/
+
+        // Get the HealthBar component
+        if (healthBarObject2 != null)
+        {
+            healthBar2 = healthBarObject2.GetComponent<Health>();
         }
 
         distance = gameObject.transform.position.z - fish1.transform.position.z;
@@ -75,12 +88,12 @@ public class PlayerLife : MonoBehaviour
             fish4.transform.position = newPosition4;
         }
 
-        if (PlayerisCollide)
+        /*if (PlayerisCollide)
         {
-            gameObject.transform.position = new Vector3(PlayerPositionX,PlayerPositionY,gameObject.transform.position.z);
+            gameObject.transform.position = new Vector3(PlayerPositionX, PlayerPositionY, gameObject.transform.position.z);
 
             PlayerisCollide = false;
-        }
+        }*/
     }
 
     void OnCollisionEnter(Collision collision)
@@ -99,7 +112,10 @@ public class PlayerLife : MonoBehaviour
         {
             if (other.gameObject == fish1 || other.gameObject == fish2 || other.gameObject == fish3 || other.gameObject == fish4)
             {
-                HandleCollision();
+                if (healthBar2 != null)
+                {
+                    healthBar2.damage(removeHealthFishCollide);
+                }
             }
         }
     }
@@ -113,40 +129,56 @@ public class PlayerLife : MonoBehaviour
         PlayCollisionSound();
 
         // Remove health points
-        if (healthBar != null)
+       /* if (healthBar != null)
         {
             healthBar.RemoveHealthPoints(removeWithCollide);
+        }*/
+
+        // Remove health points
+        if (healthBar2 != null && canCollide)
+        {
+            healthBar2.damage(removeHealthWithCollide);
+
+            StartCoroutine(Wait(timeBetweenCollides));
+            
         }
 
         /*StartCoroutine(DisableObjectAndDelay(currentCollisions));*/
     }
 
-/*    IEnumerator DisableObjectAndDelay(int collisions)
+    /*    IEnumerator DisableObjectAndDelay(int collisions)
+        {
+            canCollide = false; // Disable collision temporarily
+            // Determine which object to disappear based on currentCollisions value
+            switch (collisions)
+            {
+                case 1:
+                    if (objectToDisappear1 != null)
+                        objectToDisappear1.SetActive(false);
+                    break;
+                case 2:
+                    if (objectToDisappear2 != null)
+                        objectToDisappear2.SetActive(false);
+                    break;
+                case 3:
+                    if (objectToDisappear3 != null)
+                        objectToDisappear3.SetActive(false);
+                    // Call the GameOver method after 0.2f second delay
+                    Invoke("GameOver", 0.2f);
+                    break;
+                default:
+                    break;
+            }
+            yield return new WaitForSeconds(waitTime); // Wait for 2 seconds
+            canCollide = true; // Enable collision after delay
+        }*/
+
+    IEnumerator Wait(int number)
     {
         canCollide = false; // Disable collision temporarily
-        // Determine which object to disappear based on currentCollisions value
-        switch (collisions)
-        {
-            case 1:
-                if (objectToDisappear1 != null)
-                    objectToDisappear1.SetActive(false);
-                break;
-            case 2:
-                if (objectToDisappear2 != null)
-                    objectToDisappear2.SetActive(false);
-                break;
-            case 3:
-                if (objectToDisappear3 != null)
-                    objectToDisappear3.SetActive(false);
-                // Call the GameOver method after 0.2f second delay
-                Invoke("GameOver", 0.2f);
-                break;
-            default:
-                break;
-        }
-        yield return new WaitForSeconds(waitTime); // Wait for 2 seconds
+        yield return new WaitForSeconds(number); // Wait for 1 seconds
         canCollide = true; // Enable collision after delay
-    }*/
+    }
 
     void GameOver()
     {
