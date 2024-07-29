@@ -42,12 +42,12 @@ public class PanelOpenUp : MonoBehaviour
 
             numOfLines = lines.Length;
 
-            Debug.Log("num of caves from file: " + numOfLines);
+            /*Debug.Log("num of caves from file: " + numOfLines);*/
 
             foreach (string line in lines)
             {
                 
-                Debug.Log(line); // Prints each line of the CSV file
+                /*Debug.Log(line);*/ // Prints each line of the CSV file
 
                 // Split the line into fields based on the comma delimiter
                 string[] fields = line.Split(',');
@@ -55,7 +55,7 @@ public class PanelOpenUp : MonoBehaviour
                 // Process the fields as needed
                 foreach (string field in fields)
                 {
-                    Debug.Log(field); // Prints each field in the current line
+                    /*Debug.Log(field);*/ // Prints each field in the current line
                 }
             }
         }
@@ -68,7 +68,7 @@ public class PanelOpenUp : MonoBehaviour
     public void num_of_caves(float value)
     {
         num_caves_from_user = 0;
-        Debug.Log("before update: " + num_caves_from_user);
+        /*Debug.Log("before update: " + num_caves_from_user);*/
 
         // Round down the value to the nearest integer
         int intValue = Mathf.FloorToInt(value);
@@ -77,7 +77,7 @@ public class PanelOpenUp : MonoBehaviour
 
         num_caves_from_user = intValue;
 
-        Debug.Log("num_caves_from_user after update: " + numOfLines);
+        /*Debug.Log("num_caves_from_user after update: " + numOfLines);*/
     }
 
 
@@ -86,7 +86,7 @@ public class PanelOpenUp : MonoBehaviour
         if (Panel != null)
         {
             Panel.SetActive(false);
-            Debug.Log("num_caves_from_user in ClosePanel: " + numOfLines);
+            /*Debug.Log("num_caves_from_user in ClosePanel: " + numOfLines);*/
             Vector3 currentPosition = objectToScale.transform.position;
             Vector3 currentPositionOxygen = oxygenObject.transform.position;
             Vector3 currentPositionWall = wall.transform.position;
@@ -106,16 +106,16 @@ public class PanelOpenUp : MonoBehaviour
 
                 // Diameter
                 float valueY = float.Parse(fields[1]);
-                Debug.Log("Y of cave " + i +" from file: " + valueY);
+                /*Debug.Log("Y of cave " + i +" from file: " + valueY);*/
            
 
                 // Height
                 float posY = float.Parse(fields[2]);
-                Debug.Log("posY of cave " + i +" from file: " + posY);
+                /*Debug.Log("posY of cave " + i +" from file: " + posY);*/
 
                 // Length
                 float valueZ = float.Parse(fields[3]);
-                Debug.Log("Z of cave " + i +" from file: " + valueZ);
+                /*Debug.Log("Z of cave " + i +" from file: " + valueZ);*/
 
                 float valueZnext = valueZ;
 
@@ -127,14 +127,14 @@ public class PanelOpenUp : MonoBehaviour
 
                 newScale = new Vector3(newScale.x, valueY, valueZ);
 
-                Debug.Log("current cave position: " + currentPosition.x + " " + currentPosition.y + " " + currentPosition.z);
+                /*Debug.Log("current cave position: " + currentPosition.x + " " + currentPosition.y + " " + currentPosition.z);*/
                 
                 newPosition = new Vector3(currentPosition.x, currentPosition.y + posY, currentPositionWall.z - 70);
 
                 currentPosition = new Vector3(currentPosition.x,currentPosition.y,newPosition.z);
 
-                Debug.Log( i +" current cave position: " + currentPosition.x + " " + currentPosition.y + " " + currentPosition.z);
-
+                /*Debug.Log( i +" current cave position: " + currentPosition.x + " " + currentPosition.y + " " + currentPosition.z);
+*/
                 //instantiate objects
                 GameObject newObject = Instantiate(objectToScale, newPosition, Quaternion.identity);
                 newObject.transform.localScale = newScale;
