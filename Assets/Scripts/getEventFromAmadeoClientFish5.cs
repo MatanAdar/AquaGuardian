@@ -31,7 +31,7 @@ public class getEventFromAmadeoClientFish5 : MonoBehaviour
     {
         if (!Panel.activeSelf && forces != null && forces.Length > 0)
         {
-            float forceValue = forces[1];
+            float forceValue = forces[4];
             // Move the fish based on forces[1]
             Vector3 newPosition = new Vector3(transform.position.x, transform.position.y + (forceValue), transform.position.z);
             gameObject.transform.position = Vector3.Lerp(transform.position, newPosition, smoothSpeed * Time.deltaTime);
