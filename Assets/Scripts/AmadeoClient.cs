@@ -19,12 +19,12 @@ public class AmadeoClient : MonoBehaviour
 {
     /*public static AmadeoClient Instance { get; private set; }*/
 
-    [SerializeField] InputType inputType = InputType.EmulationMode;
+    [SerializeField] InputType inputType = InputType.Amadeo;
 
     [SerializeField, Tooltip("Port should be 4444 for Amadeo connection"), Range(1024, 49151)]
     private int _port = 4444;
 
-    [SerializeField] private int _zeroFBuffer = 100;
+    [SerializeField] private int _zeroFBuffer = 10;
 
     private CancellationTokenSource _cancellationTokenSource;
     private bool _isReceiving = false;
@@ -36,7 +36,7 @@ public class AmadeoClient : MonoBehaviour
     private IPEndPoint _remoteEndPoint;
 
     private float[] _forces = new float[5];
-    private readonly float[] _zeroForces = new float[5];
+    private readonly float[] _zeroForces = new float[5]; // init [0,0,0,0,0]
     private bool _isLeftHand = false;
 
     public event Action<float[]> OnForcesUpdated;
@@ -61,6 +61,7 @@ public class AmadeoClient : MonoBehaviour
         {
             _udpClient = new UdpClient(_port);
             _remoteEndPoint = new IPEndPoint(IPAddress.Any, 0);
+            // open connetction with the amadeo socket (4444)
         }
         catch (Exception ex)
         {
@@ -70,25 +71,27 @@ public class AmadeoClient : MonoBehaviour
 
         _cancellationTokenSource = new CancellationTokenSource();
         Debug.Log("amendoClient started");
-        StartReceiveData();
+        //StartReceiveData();
         
     }
 
-    public void StartReceiveData(bool zeroF = false)
+    public void StartZeroF()
+    {
+
+            SetZeroF(_cancellationTokenSource.Token);
+            Debug.Log("StartReceiveData :: Starting zeroing forces.");
+            return;
+    }
+
+    // forces [1,1,3,4,1]
+
+    public void StartReceiveData()
     {
         if (_cancellationTokenSource.IsCancellationRequested)
         {
             _cancellationTokenSource.Dispose();
             _cancellationTokenSource = new CancellationTokenSource();
         }
-
-        if (zeroF)
-        {
-            SetZeroF(_cancellationTokenSource.Token);
-            Debug.Log("StartReceiveData :: Starting zeroing forces.");
-            return;
-        }
-
         _isReceiving = true;
         if (inputType == InputType.EmulationMode)
         {
@@ -97,6 +100,8 @@ public class AmadeoClient : MonoBehaviour
         }
         else
         {
+            Debug.Log("StartReceiveData :: Amadeo mode is true. Starting Amadeo data.");
+
             ReceiveDataAmadeo(_cancellationTokenSource.Token);
         }
     }
@@ -114,7 +119,9 @@ public class AmadeoClient : MonoBehaviour
             {
                 UdpReceiveResult result = await _udpClient.ReceiveAsync();
                 string receivedData = Encoding.ASCII.GetString(result.Buffer);
+                Debug.Log("ReceiveDataAmadeo :: Data: " +  receivedData);
                 HandleReceivedData(ParseDataFromAmadeo(receivedData));
+
             }
             catch (OperationCanceledException)
             {
@@ -189,6 +196,13 @@ public class AmadeoClient : MonoBehaviour
         return data.Replace("<Amadeo>", "").Replace("</Amadeo>", "");
     }
 
+    private void OnDestroy()
+    {
+        Debug.Log("Called OnDestroy() in AmadeoClient...");
+        StopClientConnection();
+    }
+
+
     private void OnApplicationQuit()
     {
         StopClientConnection();
@@ -247,6 +261,7 @@ public class AmadeoClient : MonoBehaviour
                 {
                     UdpReceiveResult result = await _udpClient.ReceiveAsync();
                     string receivedData = Encoding.ASCII.GetString(result.Buffer);
+                    Debug.Log(receivedData);
 
                     HandleReceivedData(ParseDataFromAmadeo(receivedData));
 

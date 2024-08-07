@@ -7,6 +7,7 @@ using System.IO;
 
 public class PanelOpenUp : MonoBehaviour
 {
+    [SerializeField] private AmadeoClient _client;
     public GameObject Panel;
     [SerializeField] public float maxSliderAmount = 5.0f;
     [SerializeField] public GameObject objectToScale = null;
@@ -153,6 +154,13 @@ public class PanelOpenUp : MonoBehaviour
                 GameObject newOxygenObject = Instantiate(oxygenObject, newOxygenPosition, Quaternion.identity);
                 GameObject newWallObject = Instantiate(wall, newWallPosition, Quaternion.identity);
                 GameObject newArrowsObject = Instantiate(arrows, newArrowsPosition, Quaternion.identity);
+
+                if (_client == null )
+                {
+                    Debug.LogWarning("Amadeo Client is null");
+                    return;
+                }
+                _client.StartReceiveData();
             }
 
             //instantiate chest
