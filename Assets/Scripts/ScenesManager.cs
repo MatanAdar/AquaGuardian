@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class ScenesManager : MonoBehaviour
 {
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,9 +18,14 @@ public class ScenesManager : MonoBehaviour
         
     }
 
-    public void GoToGameScene()
+    public void GoToGameSceneLeft()
     {
-        SceneManager.LoadScene("Scene_Ocean");
+        SceneManager.LoadScene("Scene_Ocean_Left");
+    }
+
+    public void GoToGameSceneRight()
+    {
+        SceneManager.LoadScene("Scene_Ocean_Right");
     }
 
     public void GoToSettingScene()
