@@ -109,6 +109,10 @@ public class PlayerMovement : MonoBehaviour
             show = false;
 
         }
+    }
+
+    void FixedUpdate()
+    {
 
         if (canMove && afterText)
         {

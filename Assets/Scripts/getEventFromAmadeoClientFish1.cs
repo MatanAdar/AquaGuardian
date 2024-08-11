@@ -14,6 +14,11 @@ public class getEventFromAmadeoClientFish1 : MonoBehaviour
 
     public GameObject Panel;
 
+    [SerializeField] public GameObject player = null;
+
+    private float minPositionY = 0;
+    private float maxPositionY = 0;
+
     private void OnEnable()
     {
         if (amadeoClient != null)
@@ -34,22 +39,42 @@ public class getEventFromAmadeoClientFish1 : MonoBehaviour
     {
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
 
+        minPositionY = player.transform.position.y - (float)1.1;
+
+        maxPositionY = player.transform.position.y + (float)1.1;
+
         if (!Panel.activeSelf && forces != null && forces.Length > 0)
         {
-            float forceValue = 0;
+            float forceValue;
 
-            if (sceneIndex == 4)
+            if (sceneIndex == 4)  // right hand
             {
                 forceValue = forces[0];
             }
-            else
+            else //left hand
             {
                 forceValue = forces[4];
             }
 
-            // Move the fish based on forces[0]
+            if (transform.position.y + forceValue > minPositionY && transform.position.y + forceValue < maxPositionY)
+            {
+                Vector3 newPosition = new Vector3(transform.position.x, transform.position.y + (forceValue), transform.position.z);
+                gameObject.transform.position = Vector3.Lerp(transform.position, newPosition, smoothSpeed * Time.deltaTime);
+            }
+            else if (transform.position.y + forceValue < minPositionY)
+            {
+                Vector3 newPosition = new Vector3(transform.position.x, minPositionY, transform.position.z);
+                gameObject.transform.position = Vector3.Lerp(transform.position, newPosition, smoothSpeed * Time.deltaTime);
+            }
+            else if (transform.position.y + forceValue > maxPositionY)
+            {
+                Vector3 newPosition = new Vector3(transform.position.x, maxPositionY, transform.position.z);
+                gameObject.transform.position = Vector3.Lerp(transform.position, newPosition, smoothSpeed * Time.deltaTime);
+            }
+
+            /*// Move the fish based on forces[0]
             Vector3 newPosition = new Vector3(transform.position.x,transform.position.y + (forceValue),transform.position.z);
-            gameObject.transform.position = Vector3.Lerp(transform.position, newPosition, smoothSpeed * Time.deltaTime);
+            gameObject.transform.position = Vector3.Lerp(transform.position, newPosition, smoothSpeed * Time.deltaTime);*/
         }
     }
 
