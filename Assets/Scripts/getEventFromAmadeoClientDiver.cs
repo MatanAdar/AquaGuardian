@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,9 @@ public class getEventFromAmadeoClientDiver : MonoBehaviour
     public float smoothSpeed = 0.5f;
 
     public GameObject Panel;
+
+    [SerializeField] private float minForce;
+    [SerializeField] private float maxForce;
 
     private void OnEnable()
     {
@@ -31,10 +35,12 @@ public class getEventFromAmadeoClientDiver : MonoBehaviour
     {
         if (!Panel.activeSelf && forces != null && forces.Length > 0)
         {
-            float forceValue = forces[2];
+            float forceValue = forces[3];
+            
             // Move the fish based on forces[2]
-            Vector3 newPosition = new Vector3(transform.position.x,transform.position.y + (forceValue),transform.position.z);
+            Vector3 newPosition = new Vector3(transform.position.x, transform.position.y + (forceValue), transform.position.z);
             gameObject.transform.position = Vector3.Lerp(transform.position, newPosition, smoothSpeed * Time.deltaTime);
+            
 
         }
     }
