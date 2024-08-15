@@ -18,9 +18,9 @@ public class ScenesManager : MonoBehaviour
         
     }
 
-    public void GoToGameSceneLeft()
+    public void GoToGameScene()
     {
-        SceneManager.LoadScene("Scene_Ocean_Left");
+        SceneManager.LoadScene("Scene_Ocean");
     }
 
     public void GoToGameSceneRight()
