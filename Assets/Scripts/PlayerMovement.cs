@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed;
+    public float speed = 30f;
     public float rotationSpeed;
     public float verticalSpeed; // Adjust this for the speed of upward and downward movement
-    public float idleUpwardSpeed; // Adjust this for the speed of upward movement when no input is detected
+    public float idleUpwardSpeed = 20f; // Adjust this for the speed of upward movement when no input is detected
 
     private Rigidbody rb;
     public GameObject Panel;
@@ -54,6 +54,9 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip collisionSound; // Assign this in the inspector
     private AudioSource audioSource;
 
+    [SerializeField] GameObject surface;
+    [SerializeField] GameObject ground;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -96,10 +99,10 @@ public class PlayerMovement : MonoBehaviour
             canMove = !Panel.activeSelf;
         }
 
-        if (!blue.gameObject.activeInHierarchy && !green.gameObject.activeInHierarchy && !red.gameObject.activeInHierarchy && !purple.gameObject.activeInHierarchy)
+        /*if (!blue.gameObject.activeInHierarchy && !green.gameObject.activeInHierarchy && !red.gameObject.activeInHierarchy && !purple.gameObject.activeInHierarchy)
         {
             SceneManager.LoadScene(sceneName);
-        }
+        }*/
 
         if (show && !Panel.activeSelf)
         {
@@ -107,36 +110,75 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(ShowInfoTextAndKeys());
 
             show = false;
-
         }
     }
 
     void FixedUpdate()
     {
-
         if (canMove && afterText)
         {
             // Always move the player forward
             Vector3 movementDirection = Vector3.forward; // Move along the z-axis (forward direction)
             movementDirection.Normalize();
 
-            // Apply movement
-            Vector3 move = transform.TransformDirection(movementDirection) * speed * Time.deltaTime;
-            rb.MovePosition(rb.position + move);
-
-            // Apply vertical movement directly
+            // Get vertical input
             float upDownInput = Input.GetAxis("UpDown");
-            float verticalMovement = upDownInput * verticalSpeed * Time.deltaTime;
+            float verticalMovement = upDownInput * verticalSpeed;
 
             // If no down input, apply idle upward movement
             if (upDownInput <= 0)
             {
-                verticalMovement += idleUpwardSpeed * Time.deltaTime;
+                verticalMovement += idleUpwardSpeed;
             }
 
-            rb.MovePosition(rb.position + Vector3.up * verticalMovement);
+            // Calculate movement vector
+            Vector3 move = transform.TransformDirection(movementDirection) * speed;
 
-            // Rotate towards forward direction
+            // Handle vertical movement with raycasting
+            RaycastHit hit;
+
+            // Check if moving down and detect collision with the ground
+            if (verticalMovement < 0) // Moving down
+            {
+                if (Physics.Raycast(rb.position, Vector3.down, out hit, Mathf.Abs(verticalMovement * Time.deltaTime)))
+                {
+                    if (hit.collider.gameObject == ground)
+                    {
+                        verticalMovement = 0; // Stop downward movement
+                    }
+                }
+            }
+
+            // Check if moving up and detect collision with the surface
+            if (verticalMovement > 0) // Moving up
+            {
+                if (Physics.Raycast(rb.position, Vector3.up, out hit, Mathf.Abs(verticalMovement * Time.deltaTime)))
+                {
+                    if (hit.collider.gameObject == surface)
+                    {
+                        verticalMovement = 0; // Stop upward movement
+                    }
+                }
+            }
+
+            // Apply movement vector
+            Vector3 newVelocity = new Vector3(move.x, verticalMovement, move.z);
+
+            // Check horizontal collisions and adjust movement if needed
+            if (Physics.Raycast(rb.position, move.normalized, out hit, speed * Time.deltaTime))
+            {
+                if (hit.collider != null)
+                {
+                    // Stop horizontal movement if blocked
+                    newVelocity.x = 0;
+                    newVelocity.z = 0;
+                }
+            }
+
+            // Set the Rigidbody's velocity
+            rb.velocity = newVelocity;
+
+            // Rotate towards the forward direction
             if (movementDirection != Vector3.zero)
             {
                 Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
@@ -144,6 +186,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
 
 
     // Method to toggle player movement on or off
