@@ -151,9 +151,13 @@ public class PanelOpenUp : MonoBehaviour
                 //instantiate objects
                 /*GameObject newObject = Instantiate(objectToScale, newPosition, Quaternion.identity);
                 newObject.transform.localScale = newScale;*/
-                GameObject newOxygenObject = Instantiate(oxygenObject, newOxygenPosition, Quaternion.identity);
-                GameObject newWallObject = Instantiate(wall, newWallPosition, Quaternion.identity);
-                GameObject newArrowsObject = Instantiate(arrows, newArrowsPosition, Quaternion.identity);
+
+                if (i != numOfLines - 1)
+                {
+                    GameObject newOxygenObject = Instantiate(oxygenObject, newOxygenPosition, Quaternion.identity);
+                    GameObject newWallObject = Instantiate(wall, newWallPosition, Quaternion.identity);
+                    GameObject newArrowsObject = Instantiate(arrows, newArrowsPosition, Quaternion.identity);
+                }
 
                 if (_client == null )
                 {
@@ -164,7 +168,7 @@ public class PanelOpenUp : MonoBehaviour
             }
 
             //instantiate chest
-            Vector3 newPosition_chest = new Vector3(chestX, chestY, newPosition.z - (pivotChest));
+            Vector3 newPosition_chest = new Vector3(chestX, currentPosition.y, newPosition.z - (pivotChest));
 
             GameObject newObject_chest = Instantiate(chest, newPosition_chest, Quaternion.identity);
 

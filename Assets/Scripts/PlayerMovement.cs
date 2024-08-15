@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 30f;
+    [SerializeField] float speed;
     public float rotationSpeed;
-    public float verticalSpeed; // Adjust this for the speed of upward and downward movement
-    public float idleUpwardSpeed = 20f; // Adjust this for the speed of upward movement when no input is detected
+    [SerializeField] float verticalSpeed; // Adjust this for the speed of upward and downward movement
+    [SerializeField] float idleUpwardSpeed; // Adjust this for the speed of upward movement when no input is detected
 
     private Rigidbody rb;
     public GameObject Panel;
