@@ -10,18 +10,19 @@ using static UnityEngine.Rendering.DebugUI;
 public class Health : MonoBehaviour
 {
 
-    public TextMeshProUGUI healthText;
-    public Image healthBar;
+    [SerializeField] TextMeshProUGUI healthText;
+    [SerializeField] Image healthBar;
 
-    float health = 100;
-    float maxHealth = 100;
+    private float health = 100f;
+    private float maxHealth = 100f;
 
-    float lerpSpeed;
+    private float lerpSpeed;
+    private float factorLerpSpeed = 3f;
 
     [SerializeField] float lifeTime;
     [SerializeField] float downHealthPairSec;
 
-    public GameObject Panel;
+    [SerializeField] GameObject Panel;
     private bool moveOxygen = false; // Set to true by default
 
     // Start is called before the first frame update
@@ -59,7 +60,7 @@ public class Health : MonoBehaviour
             health = maxHealth;
         }
 
-        lerpSpeed = 3f * Time.deltaTime;
+        lerpSpeed = factorLerpSpeed * Time.deltaTime;
     }
 
     void healthBarFiller()

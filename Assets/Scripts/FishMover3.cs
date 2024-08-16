@@ -9,10 +9,10 @@ public class FishMover3 : MonoBehaviour
     float moveSpeed;
 
     // Factor to reduce the speed
-    public float speedFactor = 0.5f;
+    private float speedFactor = 3f;
 
     // Smoothness factor for interpolation
-    public float smoothness = 0.5f;
+    private float smoothness = 2f;
 
     // Start is called before the first frame update
     void Start()

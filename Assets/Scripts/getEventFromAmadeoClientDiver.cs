@@ -12,9 +12,9 @@ public class getEventFromAmadeoClientDiver : MonoBehaviour
     [SerializeField] float factor_forces = 10f;
 
     // Smoothing factor to control how quickly the object moves towards the target position
-    public float smoothSpeed = 0.5f;
+    private float smoothSpeed = 1.5f;
 
-    public GameObject Panel;
+    [SerializeField] GameObject Panel;
 
     private int indexForce = -1;
 
@@ -46,8 +46,10 @@ public class getEventFromAmadeoClientDiver : MonoBehaviour
     private void HandleForcesUpdated(float[] forces)
     {
         Debug.Log(indexForce);
+
         if (!Panel.activeSelf && forces != null && forces.Length > 0)
         {
+            Debug.Log("factor_force: " + float.Parse(factor_force_inputField.text));
 
             float forceValue = forces[indexForce] * float.Parse(factor_force_inputField.text); // Apply factor here
 

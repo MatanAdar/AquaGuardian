@@ -3,10 +3,10 @@ using UnityEngine;
 public class ArrowUpDown : MonoBehaviour
 {
     // Speed of the movement
-    public float speed = 2.0f;
+    private float speed = 2f;
 
     // The distance the arrow will move up and down
-    public float distance = 2f;
+    private float distance = 10f;
 
     // Initial position of the arrow
     private Vector3 startPosition;
