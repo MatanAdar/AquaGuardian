@@ -119,7 +119,7 @@ public class AmadeoClient : MonoBehaviour
             {
                 UdpReceiveResult result = await _udpClient.ReceiveAsync();
                 string receivedData = Encoding.ASCII.GetString(result.Buffer);
-                Debug.Log("ReceiveDataAmadeo :: Data: " +  receivedData);
+               // Debug.Log("ReceiveDataAmadeo :: Data: " +  receivedData);
                 HandleReceivedData(ParseDataFromAmadeo(receivedData));
 
             }

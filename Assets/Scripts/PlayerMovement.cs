@@ -3,13 +3,19 @@ using UnityEngine;
 using TMPro;
 using System;
 using UnityEngine.SceneManagement;
+using UnityEditor.Compilation;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] float speed;
+    private float speed;
+    public TMP_InputField speed_inputField;
+
     public float rotationSpeed;
-    [SerializeField] float verticalSpeed; // Adjust this for the speed of upward and downward movement
-    [SerializeField] float idleUpwardSpeed; // Adjust this for the speed of upward movement when no input is detected
+    private float verticalSpeed; // Adjust this for the speed of upward and downward movement
+    public TMP_InputField vertical_speed_inputField;
+
+    private float idleUpwardSpeed; // Adjust this for the speed of upward movement when no input is detected
+    public TMP_InputField idle_upward_speed_inputField;
 
     private Rigidbody rb;
     public GameObject Panel;
@@ -59,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+
         rb = GetComponent<Rigidbody>();
         // Make sure to set the Rigidbody's collision detection mode to Continuous for accurate collision handling
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
@@ -106,6 +113,26 @@ public class PlayerMovement : MonoBehaviour
 
         if (show && !Panel.activeSelf)
         {
+            bool isSpeedValid = float.TryParse(speed_inputField.text, out speed);
+            bool isSpeedVerticalValid = float.TryParse(vertical_speed_inputField.text, out verticalSpeed);
+            bool isIdleUpwardSpeedValid = float.TryParse(idle_upward_speed_inputField.text, out idleUpwardSpeed);
+            if (isSpeedValid && isSpeedVerticalValid && isIdleUpwardSpeedValid)
+            {
+                speed = float.Parse(speed_inputField.text);
+
+                verticalSpeed = float.Parse(vertical_speed_inputField.text);
+
+                idleUpwardSpeed = float.Parse(idle_upward_speed_inputField.text);
+
+            }
+            else
+            {
+                Debug.Log("error: " + speed_inputField.text);
+                Debug.Log(vertical_speed_inputField.text);
+                Debug.Log(idle_upward_speed_inputField.text);
+            }
+            Debug.Log("speed: " + speed);
+
             // Show the info text for 4 seconds
             StartCoroutine(ShowInfoTextAndKeys());
 
@@ -117,6 +144,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (canMove && afterText)
         {
+            Debug.Log("speed: " + speed + ", vertical speed: " + verticalSpeed + ", idleUpwardSpeed: " + idleUpwardSpeed);
             // Always move the player forward
             Vector3 movementDirection = Vector3.forward; // Move along the z-axis (forward direction)
             movementDirection.Normalize();
