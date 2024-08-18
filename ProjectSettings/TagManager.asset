@@ -7,6 +7,8 @@ TagManager:
   - Chest
   - Cave
   - OxygenObject
+  - Wall
+  - Ground
   layers:
   - Default
   - TransparentFX

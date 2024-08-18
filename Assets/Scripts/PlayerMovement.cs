@@ -7,19 +7,19 @@ using UnityEditor.Compilation;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    [SerializeField] public float speed;
     public TMP_InputField speed_inputField;
 
     public float rotationSpeed;
-    private float verticalSpeed; // Adjust this for the speed of upward and downward movement
+    public float verticalSpeed; // Adjust this for the speed of upward and downward movement
     public TMP_InputField vertical_speed_inputField;
 
-    private float idleUpwardSpeed; // Adjust this for the speed of upward movement when no input is detected
+    public float idleUpwardSpeed; // Adjust this for the speed of upward movement when no input is detected
     public TMP_InputField idle_upward_speed_inputField;
 
     private Rigidbody rb;
     public GameObject Panel;
-    private bool canMove = true; // Set to true by default
+    public bool canMove = true; // Set to true by default
 
     /*[SerializeField] public TextMeshProUGUI infoText1; // Reference to the text object
     [SerializeField] public TextMeshProUGUI infoText2; // Reference to the text object
@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public GameObject key3; // Reference to the key object*/
 
     private bool show = true;
-    private bool afterText = false;
+    public bool afterText = false;
 
 
     /*[SerializeField] GameObject blue;
@@ -115,11 +115,8 @@ public class PlayerMovement : MonoBehaviour
             if (isSpeedValid && isSpeedVerticalValid && isIdleUpwardSpeedValid)
             {
                 speed = float.Parse(speed_inputField.text);
-
                 verticalSpeed = float.Parse(vertical_speed_inputField.text);
-
                 idleUpwardSpeed = float.Parse(idle_upward_speed_inputField.text);
-
             }
             else
             {
@@ -138,50 +135,28 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-
-        if (canMove && afterText)
-        {
-            // Always move the player forward
+        /*
+        if (canMove && afterText)  {
             Vector3 movementDirection = Vector3.forward; // Move along the z-axis (forward direction)
-            movementDirection.Normalize();
-
-            // Apply movement
-            Vector3 move = transform.TransformDirection(movementDirection) * speed * Time.deltaTime;
-            //rb.MovePosition(rb.position + move);
-            rb.AddForce(move, ForceMode.Acceleration);
-
-            // Apply vertical movement directly
+            Vector3 targetVelocity = speed * transform.TransformDirection(movementDirection);
             float upDownInput = Input.GetAxis("UpDown");
-            float verticalMovement = upDownInput * verticalSpeed * Time.deltaTime;
-
-            // If no down input, apply idle upward movement
-            if (upDownInput <= 0)
-            {
-                verticalMovement += idleUpwardSpeed * Time.deltaTime;
+            float verticalMovementSpeed = upDownInput * verticalSpeed;
+            if (upDownInput <= 0) {
+                verticalMovementSpeed += idleUpwardSpeed;
             }
-
-            rb.MovePosition(rb.position + Vector3.up * verticalMovement);
-
-            // Rotate towards forward direction
-            if (movementDirection != Vector3.zero)
-            {
-                Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-                rb.MoveRotation(Quaternion.RotateTowards(rb.rotation, toRotation, rotationSpeed * Time.deltaTime));
-            }
+            targetVelocity += verticalMovementSpeed * transform.TransformDirection(Vector3.up);
+            rb.velocity = targetVelocity;
         }
+        */
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Wall"))
+        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Cave"))
         {
-            if (collision.gameObject.CompareTag("Wall"))
-            {
-                // Stop the object from moving further
-                Rigidbody rb = GetComponent<Rigidbody>();
-                rb.velocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
-            }
+
+            Debug.Log("collision " + gameObject.name + " " +collision.gameObject.name);
+            
         }
     }
 
