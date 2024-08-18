@@ -7,7 +7,7 @@ using UnityEditor.Compilation;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float speed;
+    [SerializeField] private float speed;
     public TMP_InputField speed_inputField;
 
     public float rotationSpeed;
@@ -138,74 +138,49 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+
         if (canMove && afterText)
         {
             // Always move the player forward
             Vector3 movementDirection = Vector3.forward; // Move along the z-axis (forward direction)
             movementDirection.Normalize();
 
-            // Get vertical input
+            // Apply movement
+            Vector3 move = transform.TransformDirection(movementDirection) * speed * Time.deltaTime;
+            //rb.MovePosition(rb.position + move);
+            rb.AddForce(move, ForceMode.Acceleration);
+
+            // Apply vertical movement directly
             float upDownInput = Input.GetAxis("UpDown");
-            float verticalMovement = upDownInput * verticalSpeed;
+            float verticalMovement = upDownInput * verticalSpeed * Time.deltaTime;
 
             // If no down input, apply idle upward movement
             if (upDownInput <= 0)
             {
-                verticalMovement += idleUpwardSpeed;
+                verticalMovement += idleUpwardSpeed * Time.deltaTime;
             }
 
-            // Calculate movement vector
-            Vector3 move = transform.TransformDirection(movementDirection) * speed;
+            rb.MovePosition(rb.position + Vector3.up * verticalMovement);
 
-            // Handle vertical movement with raycasting
-            RaycastHit hit;
-
-            // Check if moving down and detect collision with the ground
-            if (verticalMovement < 0) // Moving down
-            {
-                if (Physics.Raycast(rb.position, Vector3.down, out hit, Mathf.Abs(verticalMovement * Time.deltaTime)))
-                {
-                    if (hit.collider.gameObject == ground)
-                    {
-                        verticalMovement = 0; // Stop downward movement
-                    }
-                }
-            }
-
-            // Check if moving up and detect collision with the surface
-            if (verticalMovement > 0) // Moving up
-            {
-                if (Physics.Raycast(rb.position, Vector3.up, out hit, Mathf.Abs(verticalMovement * Time.deltaTime)))
-                {
-                    if (hit.collider.gameObject == surface)
-                    {
-                        verticalMovement = 0; // Stop upward movement
-                    }
-                }
-            }
-
-            // Apply movement vector
-            Vector3 newVelocity = new Vector3(move.x, verticalMovement, move.z);
-
-            // Check horizontal collisions and adjust movement if needed
-            if (Physics.Raycast(rb.position, move.normalized, out hit, speed * Time.deltaTime))
-            {
-                if (hit.collider != null)
-                {
-                    // Stop horizontal movement if blocked
-                    newVelocity.x = 0;
-                    newVelocity.z = 0;
-                }
-            }
-
-            // Set the Rigidbody's velocity
-            rb.velocity = newVelocity;
-
-            // Rotate towards the forward direction
+            // Rotate towards forward direction
             if (movementDirection != Vector3.zero)
             {
                 Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
                 rb.MoveRotation(Quaternion.RotateTowards(rb.rotation, toRotation, rotationSpeed * Time.deltaTime));
+            }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            if (collision.gameObject.CompareTag("Wall"))
+            {
+                // Stop the object from moving further
+                Rigidbody rb = GetComponent<Rigidbody>();
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
             }
         }
     }
