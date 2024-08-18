@@ -21,11 +21,11 @@ public class PlayerMovement : MonoBehaviour
     public GameObject Panel;
     private bool canMove = true; // Set to true by default
 
-    [SerializeField] public TextMeshProUGUI infoText1; // Reference to the text object
+    /*[SerializeField] public TextMeshProUGUI infoText1; // Reference to the text object
     [SerializeField] public TextMeshProUGUI infoText2; // Reference to the text object
     [SerializeField] public TextMeshProUGUI infoText3; // Reference to the text object
     [SerializeField] public TextMeshProUGUI infoText4; // Reference to the text object
-    [SerializeField] public TextMeshProUGUI infoText5; // Reference to the text object
+    [SerializeField] public TextMeshProUGUI infoText5; // Reference to the text object*/
     [SerializeField] public TextMeshProUGUI infoText6; // Reference to the text object
     [SerializeField] public TextMeshProUGUI infoText7; // Reference to the text object
 
@@ -37,10 +37,10 @@ public class PlayerMovement : MonoBehaviour
     private bool afterText = false;
 
 
-    [SerializeField] GameObject blue;
+    /*[SerializeField] GameObject blue;
     [SerializeField] GameObject green;
     [SerializeField] GameObject red;
-    [SerializeField] GameObject purple;
+    [SerializeField] GameObject purple;*/
 
     private int counterFish = 0;
 
@@ -70,13 +70,8 @@ public class PlayerMovement : MonoBehaviour
         // Make sure to set the Rigidbody's collision detection mode to Continuous for accurate collision handling
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
 
-        if (infoText1 != null && infoText2 != null && infoText3 != null && infoText4 != null && infoText5 != null && infoText6 != null && infoText7 != null)
+        if (infoText6 != null && infoText7 != null)
         {
-            infoText1.gameObject.SetActive(false); // Hide the text initially
-            infoText2.gameObject.SetActive(false); // Hide the text initially
-            infoText3.gameObject.SetActive(false); // Hide the text initially
-            infoText4.gameObject.SetActive(false); // Hide the text initially
-            infoText5.gameObject.SetActive(false); // Hide the text initially
             infoText6.gameObject.SetActive(false); // Hide the text initially
             infoText7.gameObject.SetActive(false); // Hide the text initially
         }
@@ -113,6 +108,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (show && !Panel.activeSelf)
         {
+            // make speed. vertical speed and idle upward speed from user
             bool isSpeedValid = float.TryParse(speed_inputField.text, out speed);
             bool isSpeedVerticalValid = float.TryParse(vertical_speed_inputField.text, out verticalSpeed);
             bool isIdleUpwardSpeedValid = float.TryParse(idle_upward_speed_inputField.text, out idleUpwardSpeed);
@@ -131,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log(vertical_speed_inputField.text);
                 Debug.Log(idle_upward_speed_inputField.text);
             }
-            Debug.Log("speed: " + speed);
+            Debug.Log("speed: " + speed + ", vertical speed: " + verticalSpeed + ", idleUpwardSpeed: " + idleUpwardSpeed);
 
             // Show the info text for 4 seconds
             StartCoroutine(ShowInfoTextAndKeys());
@@ -144,7 +140,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (canMove && afterText)
         {
-            Debug.Log("speed: " + speed + ", vertical speed: " + verticalSpeed + ", idleUpwardSpeed: " + idleUpwardSpeed);
             // Always move the player forward
             Vector3 movementDirection = Vector3.forward; // Move along the z-axis (forward direction)
             movementDirection.Normalize();
@@ -233,7 +228,7 @@ public class PlayerMovement : MonoBehaviour
             key3.gameObject.SetActive(true);
         }*/
 
-        if (infoText1 != null && infoText2 != null && infoText3 != null && infoText4 != null && infoText5 != null && infoText6 != null && infoText7 != null)
+        if (infoText6 != null && infoText7 != null)
         {
             /*infoText1.gameObject.SetActive(true); // Show the text
             yield return WaitForSecondsOrSkip(3f); // Wait for 3 seconds or skip if Enter is pressed

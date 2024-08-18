@@ -3,7 +3,7 @@ using UnityEngine;
 public class RotateObject : MonoBehaviour
 {
     // Rotation speed around each axis
-    public Vector3 rotationSpeed = new Vector3(0, 100, 0);
+    private Vector3 rotationSpeed = new Vector3(0, 100, 0);
 
     void Update()
     {
