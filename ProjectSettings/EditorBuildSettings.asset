@@ -12,10 +12,16 @@ EditorBuildSettings:
     path: Assets/Scenes/Settings.unity
     guid: d9abddfae673e2149ac29cb0dd5eb89b
   - enabled: 1
+    path: Assets/Scenes/ZeroF.unity
+    guid: 256be655e277cdb4c93939b45e84c2d2
+  - enabled: 1
     path: Assets/Scenes/how_to_play.unity
     guid: 3324745b8a35fba44ad1a0afc8cbefec
   - enabled: 1
     path: Assets/Scenes/Scene_Ocean.unity
+    guid: 6ba13be1adfb0e04e9bd71f1b21b7084
+  - enabled: 1
+    path: Assets/Scenes/Scene_Ocean_Right.unity
     guid: 47ff9f6c1b451c74498e6319080adbb7
   - enabled: 1
     path: Assets/Scenes/End_Game.unity
