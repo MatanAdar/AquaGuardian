@@ -30,6 +30,10 @@ public class PanelOpenUp : MonoBehaviour
 
     string[] lines = null;
 
+    // Reference to the LevelProgressUI component
+    [SerializeField] private LevelProgressUI levelProgressUI;
+
+
     void Start()
     {
         ReadCSVFile(filePath);
@@ -171,6 +175,16 @@ public class PanelOpenUp : MonoBehaviour
             Vector3 newPosition_chest = new Vector3(chestX, currentPosition.y, newPosition.z - (pivotChest));
 
             GameObject newObject_chest = Instantiate(chest, newPosition_chest, Quaternion.identity);
+
+            // Get the Transform component of the newly instantiated chest
+            Transform chestTransform = newObject_chest.transform;
+
+            // Set the finish line in LevelProgressUI
+            if (levelProgressUI != null)
+            {
+                levelProgressUI.SetFinishLine(chestTransform);
+            }
+
 
         }
     }

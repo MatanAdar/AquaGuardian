@@ -3,7 +3,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using UnityEngine.SceneManagement;
-using UnityEditor.Compilation;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -135,19 +135,29 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        /*
-        if (canMove && afterText)  {
+
+        if (canMove && afterText)
+        {
             Vector3 movementDirection = Vector3.forward; // Move along the z-axis (forward direction)
             Vector3 targetVelocity = speed * transform.TransformDirection(movementDirection);
             float upDownInput = Input.GetAxis("UpDown");
             float verticalMovementSpeed = upDownInput * verticalSpeed;
-            if (upDownInput <= 0) {
+
+            // Apply idle upward speed if no input is given
+            if (upDownInput == 0)
+            {
                 verticalMovementSpeed += idleUpwardSpeed;
             }
+
+            // Add vertical movement to the target velocity
             targetVelocity += verticalMovementSpeed * transform.TransformDirection(Vector3.up);
+
+            // Apply target velocity to the Rigidbody
             rb.velocity = targetVelocity;
+
+
         }
-        */
+
     }
 
     private void OnCollisionEnter(Collision collision)
