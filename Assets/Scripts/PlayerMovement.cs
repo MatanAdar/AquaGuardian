@@ -29,9 +29,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public TextMeshProUGUI infoText6; // Reference to the text object
     [SerializeField] public TextMeshProUGUI infoText7; // Reference to the text object
 
-    /*[SerializeField] public GameObject key1; // Reference to the key object
-    [SerializeField] public GameObject key2; // Reference to the key object
-    [SerializeField] public GameObject key3; // Reference to the key object*/
 
     private bool show = true;
     public bool afterText = false;
@@ -49,17 +46,6 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] string sceneName;
 
-    /*[SerializeField] GameObject healthBarObject;
-    private HealthBar healthBar; // Reference to the HealthBar component*/
-
-    [SerializeField] GameObject healthBarObject2;
-    private Health healthBar2; // Reference to the HealthBar component
-    [SerializeField] float healHealthPoint;
-
-
-    public AudioClip collisionSound; // Assign this in the inspector
-    private AudioSource audioSource;
-
     [SerializeField] GameObject surface;
     [SerializeField] GameObject ground;
 
@@ -76,21 +62,7 @@ public class PlayerMovement : MonoBehaviour
             infoText7.gameObject.SetActive(false); // Hide the text initially
         }
 
-        /*if (key1 != null && key2 != null && key3 != null)
-        {
-            key1.gameObject.SetActive(false);
-            key2.gameObject.SetActive(false);
-            key3.gameObject.SetActive(false);
-        }*/
-
-        // Get the HealthBar component
-        if (healthBarObject2 != null)
-        {
-            healthBar2 = healthBarObject2.GetComponent<Health>();
-        }
-
-        audioSource = gameObject.AddComponent<AudioSource>();
-        audioSource.clip = collisionSound;
+        
     }
 
     void Update()
@@ -245,41 +217,6 @@ public class PlayerMovement : MonoBehaviour
                 yield break; // Skip if Enter key is pressed
             }
             yield return null;
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        // Check if the player has collided with the oxygen object
-        if (other.CompareTag("OxygenObject"))
-        {
-            Debug.Log("Collide with oxygen");
-
-            // Play collision sound
-            PlayCollisionSound();
-
-            // Disable the oxygen object
-            other.gameObject.SetActive(false);
-
-            /*// Add 2 health points
-            if (healthBar != null)
-            {
-                healthBar.AddHealthPoints(2);
-            }*/
-
-            // Add 2 health points
-            if (healthBar2 != null)
-            {
-                healthBar2.heal(healHealthPoint);
-            }
-        }
-    }
-
-    void PlayCollisionSound()
-    {
-        if (audioSource != null && collisionSound != null)
-        {
-            audioSource.Play();
         }
     }
 }

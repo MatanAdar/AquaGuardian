@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using TMPro;
+using UnityEngine.Rendering.PostProcessing; // Add this line for post-processing
 
 public class PlayerLife : MonoBehaviour
 {
@@ -18,10 +20,6 @@ public class PlayerLife : MonoBehaviour
 
     float pivotToCaveCenter = 8f;
 
-    /*public GameObject objectToDisappear1;
-    public GameObject objectToDisappear2;
-    public GameObject objectToDisappear3;*/
-
     [SerializeField] GameObject fish1;
     [SerializeField] GameObject fish2;
     [SerializeField] GameObject fish3;
@@ -30,33 +28,36 @@ public class PlayerLife : MonoBehaviour
     public AudioClip collisionSound; // Assign this in the inspector
     private AudioSource audioSource;
 
-    /*[SerializeField] GameObject healthBarObject;
-    private HealthBar healthBar; // Reference to the HealthBar component*/
-
     [SerializeField] GameObject healthBarObject2;
     private Health healthBar2; // Reference to the HealthBar component
 
-    [SerializeField] int removeHealthWithCollide;
+    private float removeHealthWithCollide;
+    public TMP_InputField removeHealthWithCollide_inputField;
 
-    [SerializeField] int removeHealthFishCollide;
+    private float timeBetweenCollides;
+    public TMP_InputField timeBetweenCollides_inputField;
 
-    [SerializeField] int timeBetweenCollides;
+    private float healHealthPoint;
+    public TMP_InputField healHealthPoints_inputField;
+
+    public bool didntGetInputsYet = false;
 
     float distance = 0;
 
+    public AudioClip collisionSoundOxygen; // Assign this in the inspector
+    private AudioSource audioSourceOxygen;
+
+    // Post-processing variables
+    public PostProcessVolume postProcessVolume;
+    private Vignette vignette;
+
     void Start()
     {
-        PlayerPositionX= gameObject.transform.position.x;
-        PlayerPositionY= (TopOfCave.transform.position.y + BottomOfCave.transform.position.y)/2;
+        PlayerPositionX = gameObject.transform.position.x;
+        PlayerPositionY = (TopOfCave.transform.position.y + BottomOfCave.transform.position.y) / 2;
 
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.clip = collisionSound;
-
-        /*// Get the HealthBar component
-        if (healthBarObject != null)
-        {
-            healthBar = healthBarObject.GetComponent<HealthBar>();
-        }*/
 
         // Get the HealthBar component
         if (healthBarObject2 != null)
@@ -64,11 +65,44 @@ public class PlayerLife : MonoBehaviour
             healthBar2 = healthBarObject2.GetComponent<Health>();
         }
 
+        audioSourceOxygen = gameObject.AddComponent<AudioSource>();
+        audioSourceOxygen.clip = collisionSoundOxygen;
+
         distance = gameObject.transform.position.z - fish1.transform.position.z;
+
+        // Get the Vignette effect from the Post-Processing Volume
+        if (postProcessVolume != null)
+        {
+            postProcessVolume.profile.TryGetSettings(out vignette);
+        }
     }
 
     private void Update()
     {
+        if (didntGetInputsYet)
+        {
+            // Get user input values
+            bool isRemoveHealthWithCollideValid = float.TryParse(removeHealthWithCollide_inputField.text, out removeHealthWithCollide);
+            bool isTimeBetweenCollidesValid = float.TryParse(timeBetweenCollides_inputField.text, out timeBetweenCollides);
+            bool isHealHealthPointValid = float.TryParse(healHealthPoints_inputField.text, out healHealthPoint);
+            if (isRemoveHealthWithCollideValid && isTimeBetweenCollidesValid && isHealHealthPointValid)
+            {
+                removeHealthWithCollide = float.Parse(removeHealthWithCollide_inputField.text);
+                timeBetweenCollides = float.Parse(timeBetweenCollides_inputField.text);
+                healHealthPoint = float.Parse(healHealthPoints_inputField.text);
+            }
+            else
+            {
+                Debug.Log("error: " + removeHealthWithCollide_inputField.text);
+                Debug.Log("error: " + timeBetweenCollides_inputField.text);
+                Debug.Log("error: " + healHealthPoints_inputField.text);
+            }
+
+            Debug.Log("removeHealthWithCollide: " + removeHealthWithCollide + ", timeBetweenCollides: " + timeBetweenCollides + ", healHealthPoint: " + healHealthPoint);
+
+            didntGetInputsYet = false;
+        }
+
         float currentDistance = gameObject.transform.position.z - fish1.transform.position.z;
         if (distance != currentDistance)
         {
@@ -76,7 +110,7 @@ public class PlayerLife : MonoBehaviour
             Vector3 newPosition2 = fish2.transform.position;
             Vector3 newPosition3 = fish3.transform.position;
             Vector3 newPosition4 = fish4.transform.position;
-            
+
             newPosition1.z = gameObject.transform.position.z - distance;
             newPosition2.z = gameObject.transform.position.z - distance;
             newPosition3.z = gameObject.transform.position.z - distance;
@@ -87,13 +121,6 @@ public class PlayerLife : MonoBehaviour
             fish3.transform.position = newPosition3;
             fish4.transform.position = newPosition4;
         }
-
-        /*if (PlayerisCollide)
-        {
-            gameObject.transform.position = new Vector3(PlayerPositionX, PlayerPositionY, gameObject.transform.position.z);
-
-            PlayerisCollide = false;
-        }*/
     }
 
     void OnCollisionEnter(Collision collision)
@@ -101,82 +128,81 @@ public class PlayerLife : MonoBehaviour
         if (canCollide && collision.collider.CompareTag("Cave"))
         {
             PlayerisCollide = true;
-
             HandleCollision();
         }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Cave"))
+        // Check if the player has collided with the oxygen object
+        if (other.CompareTag("OxygenObject"))
         {
-            if (other.gameObject == fish1 || other.gameObject == fish2 || other.gameObject == fish3 || other.gameObject == fish4)
+            Debug.Log("Collide with oxygen");
+
+            // Play collision sound
+            PlayCollisionSoundOxygen();
+
+            // Disable the oxygen object
+            other.gameObject.SetActive(false);
+
+            // Add health points
+            if (healthBar2 != null)
             {
-                if (healthBar2 != null)
-                {
-                    healthBar2.damage(removeHealthFishCollide);
-                }
+                healthBar2.heal(healHealthPoint);
             }
+        }
+    }
+
+    void PlayCollisionSoundOxygen()
+    {
+        if (audioSourceOxygen != null && collisionSoundOxygen != null)
+        {
+            audioSourceOxygen.Play();
         }
     }
 
     private void HandleCollision()
     {
         currentCollisions++; // Increment collision count
-        Debug.Log("adi_colosion");
+        Debug.Log("Collision detected");
 
         // Play collision sound
         PlayCollisionSound();
 
-        // Remove health points
-       /* if (healthBar != null)
+        // Trigger visual effect
+        if (vignette != null)
         {
-            healthBar.RemoveHealthPoints(removeWithCollide);
-        }*/
+            StartCoroutine(TriggerRedEffect());
+        }
 
         // Remove health points
         if (healthBar2 != null && canCollide)
         {
             healthBar2.damage(removeHealthWithCollide);
-
             StartCoroutine(Wait(timeBetweenCollides));
-            
         }
-
-        /*StartCoroutine(DisableObjectAndDelay(currentCollisions));*/
     }
 
-    /*    IEnumerator DisableObjectAndDelay(int collisions)
-        {
-            canCollide = false; // Disable collision temporarily
-            // Determine which object to disappear based on currentCollisions value
-            switch (collisions)
-            {
-                case 1:
-                    if (objectToDisappear1 != null)
-                        objectToDisappear1.SetActive(false);
-                    break;
-                case 2:
-                    if (objectToDisappear2 != null)
-                        objectToDisappear2.SetActive(false);
-                    break;
-                case 3:
-                    if (objectToDisappear3 != null)
-                        objectToDisappear3.SetActive(false);
-                    // Call the GameOver method after 0.2f second delay
-                    Invoke("GameOver", 0.2f);
-                    break;
-                default:
-                    break;
-            }
-            yield return new WaitForSeconds(waitTime); // Wait for 2 seconds
-            canCollide = true; // Enable collision after delay
-        }*/
+    IEnumerator TriggerRedEffect()
+    {
+        // Increase the vignette intensity to create the red effect
+        vignette.intensity.value = 0.5f;
 
-    IEnumerator Wait(int number)
+        // Wait for a second
+        yield return new WaitForSeconds(1);
+
+        // Gradually reduce the vignette intensity back to normal
+        while (vignette.intensity.value > 0.2f)
+        {
+            vignette.intensity.value -= Time.deltaTime * 0.3f;
+            yield return null;
+        }
+    }
+
+    IEnumerator Wait(float number)
     {
         canCollide = false; // Disable collision temporarily
-        yield return new WaitForSeconds(number); // Wait for 1 seconds
+        yield return new WaitForSeconds(number); // Wait for the specified time
         canCollide = true; // Enable collision after delay
     }
 
