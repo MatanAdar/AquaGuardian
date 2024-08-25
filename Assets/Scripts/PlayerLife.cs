@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using TMPro;
-using UnityEngine.Rendering.PostProcessing; // Add this line for post-processing
+using UnityEngine.UI;
 
 public class PlayerLife : MonoBehaviour
 {
@@ -47,9 +47,8 @@ public class PlayerLife : MonoBehaviour
     public AudioClip collisionSoundOxygen; // Assign this in the inspector
     private AudioSource audioSourceOxygen;
 
-    // Post-processing variables
-    public PostProcessVolume postProcessVolume;
-    private Vignette vignette;
+    // Blood splatter image
+    [SerializeField] private Image bloodSplatterImage;
 
     void Start()
     {
@@ -70,10 +69,15 @@ public class PlayerLife : MonoBehaviour
 
         distance = gameObject.transform.position.z - fish1.transform.position.z;
 
-        // Get the Vignette effect from the Post-Processing Volume
-        if (postProcessVolume != null)
+        // Ensure the blood splatter image is initially invisible
+        if (bloodSplatterImage != null)
         {
-            postProcessVolume.profile.TryGetSettings(out vignette);
+            Color color = bloodSplatterImage.color;
+            color.a = 0f; // Fully transparent
+            bloodSplatterImage.color = color;
+
+            // Disable Raycast Target to prevent blocking other UI elements
+            bloodSplatterImage.raycastTarget = false;
         }
     }
 
@@ -169,11 +173,7 @@ public class PlayerLife : MonoBehaviour
         // Play collision sound
         PlayCollisionSound();
 
-        // Trigger visual effect
-        if (vignette != null)
-        {
-            StartCoroutine(TriggerRedEffect());
-        }
+        StartCoroutine(ShowBloodSplatter()); // Show the blood splatter when damage is taken
 
         // Remove health points
         if (healthBar2 != null && canCollide)
@@ -183,19 +183,26 @@ public class PlayerLife : MonoBehaviour
         }
     }
 
-    IEnumerator TriggerRedEffect()
+    IEnumerator ShowBloodSplatter()
     {
-        // Increase the vignette intensity to create the red effect
-        vignette.intensity.value = 0.5f;
-
-        // Wait for a second
-        yield return new WaitForSeconds(1);
-
-        // Gradually reduce the vignette intensity back to normal
-        while (vignette.intensity.value > 0.2f)
+        // Make the blood splatter visible
+        if (bloodSplatterImage != null)
         {
-            vignette.intensity.value -= Time.deltaTime * 0.3f;
-            yield return null;
+            Color color = bloodSplatterImage.color;
+            color.a = 0.5f; // Fully visible
+            bloodSplatterImage.color = color;
+
+            // Fade out over 1 second
+            for (float t = 0; t < 3f; t += Time.deltaTime)
+            {
+                color.a = Mathf.Lerp(0.5f, 0f, t / 3f); // Fade out
+                bloodSplatterImage.color = color;
+                yield return null;
+            }
+
+            // Ensure it's fully invisible at the end
+            color.a = 0f;
+            bloodSplatterImage.color = color;
         }
     }
 
