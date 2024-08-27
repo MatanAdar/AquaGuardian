@@ -17,11 +17,16 @@ public class Health : MonoBehaviour
     private float lerpSpeed;
     private float factorLerpSpeed = 3f;
 
-    [SerializeField] float lifeTime;
-    [SerializeField] float downHealthPairSec;
+    private float lifeTime; // wait this amout of time before dmg auto
+    public TMP_InputField lifeTime_inputField;
+
+    private float downHealthPairSec; // damage that happend every life time that we determand
+    public TMP_InputField downHealthPairSec_inputField;
 
     [SerializeField] GameObject Panel;
     private bool moveOxygen = false; // Set to true by default
+
+    public bool didntGetInputsYet = false;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +45,27 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (didntGetInputsYet)
+        {
+            // make speed. vertical speed and idle upward speed from user
+            bool isLifeTimeValid = float.TryParse(lifeTime_inputField.text, out lifeTime);
+            bool isDownHealthPairSecValid = float.TryParse(downHealthPairSec_inputField.text, out downHealthPairSec);
+            if (isLifeTimeValid && isDownHealthPairSecValid)
+            {
+                lifeTime = float.Parse(lifeTime_inputField.text);
+                downHealthPairSec = float.Parse(downHealthPairSec_inputField.text);
+            }
+            else
+            {
+                Debug.Log("error: " + lifeTime_inputField.text);
+                Debug.Log("error: " + downHealthPairSec_inputField.text);
+            }
+
+            Debug.Log("lifeTime: " + lifeTime + ", downHealthPairSec: " + downHealthPairSec);
+
+            didntGetInputsYet = false;
+        }
+
         healthText.text = "Oxygen: " + health + "%";
 
         healthBarFiller();

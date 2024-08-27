@@ -33,6 +33,10 @@ public class PanelOpenUp : MonoBehaviour
     // Reference to the LevelProgressUI component
     [SerializeField] private LevelProgressUI levelProgressUI;
 
+    [SerializeField] private PlayerLife playerLife; //refrence to the playerLife component to change when we get the ver of this from GUI
+
+    [SerializeField] private Health health; //refrence to the health component to change when we get the ver of this fro GUI
+
 
     void Start()
     {
@@ -184,6 +188,10 @@ public class PanelOpenUp : MonoBehaviour
             {
                 levelProgressUI.SetFinishLine(chestTransform);
             }
+
+            playerLife.didntGetInputsYet = true;
+
+            health.didntGetInputsYet = true;
 
 
         }
