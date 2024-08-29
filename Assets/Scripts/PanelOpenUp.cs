@@ -23,6 +23,8 @@ public class PanelOpenUp : MonoBehaviour
     private int pivotOxygen = 100;
     private float chestX = 291.774f;
     private float chestY = 20.002f;
+    private float generalPivot = 50f;
+    private float pivotCavePlace = 70;
 
     private int numOfLines = 0;
 
@@ -138,7 +140,7 @@ public class PanelOpenUp : MonoBehaviour
 
                 /*Debug.Log("current cave position: " + currentPosition.x + " " + currentPosition.y + " " + currentPosition.z);*/
                 
-                newPosition = new Vector3(currentPosition.x, currentPosition.y + posY, currentPositionWall.z - 70);
+                newPosition = new Vector3(currentPosition.x, currentPosition.y + posY, currentPositionWall.z - pivotCavePlace);
 
                 currentPosition = new Vector3(currentPosition.x,currentPosition.y,newPosition.z);
 
@@ -148,17 +150,15 @@ public class PanelOpenUp : MonoBehaviour
                 GameObject newObject = Instantiate(objectToScale, newPosition, Quaternion.identity);
                 newObject.transform.localScale = newScale;
 
-                newOxygenPosition = new Vector3(currentPositionOxygen.x, currentPositionOxygen.y, currentPosition.z - 50);
+                //Objects position
 
-                newWallPosition = new Vector3(currentPositionWall.x, currentPositionWall.y, currentPosition.z - 50);
+                newOxygenPosition = new Vector3(currentPositionOxygen.x, currentPositionOxygen.y, currentPosition.z - generalPivot);
+
+                newWallPosition = new Vector3(currentPositionWall.x, currentPositionWall.y, currentPosition.z - generalPivot);
 
                 currentPositionWall = new Vector3(currentPositionWall.x , currentPositionWall.y , newWallPosition.z);
 
-                newArrowsPosition = new Vector3(currentPositionArrows.x, currentPositionArrows.y, currentPosition.z - 50);
-
-                //instantiate objects
-                /*GameObject newObject = Instantiate(objectToScale, newPosition, Quaternion.identity);
-                newObject.transform.localScale = newScale;*/
+                newArrowsPosition = new Vector3(currentPositionArrows.x, currentPositionArrows.y, currentPosition.z - generalPivot);
 
                 if (i != numOfLines - 1)
                 {

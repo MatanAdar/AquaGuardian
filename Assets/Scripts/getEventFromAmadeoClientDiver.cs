@@ -6,37 +6,35 @@ using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
 
-
 public class getEventFromAmadeoClientDiver : MonoBehaviour
 {
-    [SerializeField] private AmadeoClient amadeoClient;
-    [SerializeField] float factor_forces = 10f;
+    [SerializeField] private AmadeoClient amadeoClient;  // Reference to the AmadeoClient script
+    [SerializeField] float factor_forces = 10f;  // Multiplier for forces received from the Amadeo device
 
     // Smoothing factor to control how quickly the object moves towards the target position
     private float smoothSpeed = 1.5f;
 
-    [SerializeField] float verticalTolerance = 0.1f;
+    [SerializeField] float verticalTolerance = 0.1f;  // Tolerance for vertical movement to avoid unnecessary small adjustments
 
-    [SerializeField] GameObject Panel;
+    [SerializeField] GameObject Panel;  // Reference to a UI panel
 
-    private int indexForce = -1;
+    private int indexForce = -1;  // Index of the selected finger (force to be used)
 
-    public TMP_InputField factor_force_inputField;
-    private Rigidbody rb;
-    private PlayerMovement pm;
+    public TMP_InputField factor_force_inputField;  // Input field to adjust the force multiplier
+    private Rigidbody rb;  // Rigidbody component for physics-based movement
+    private PlayerMovement pm;  // Reference to the PlayerMovement script
 
     void Start()
     {
-
-        rb = GetComponent<Rigidbody>();
-        // Make sure to set the Rigidbody's collision detection mode to Continuous for accurate collision handling
+        rb = GetComponent<Rigidbody>();  // Get the Rigidbody component attached to the GameObject
+        // Set the Rigidbody's collision detection mode to Continuous for better accuracy in collisions
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
 
-        pm = GetComponent<PlayerMovement>();
+        pm = GetComponent<PlayerMovement>();  // Get the PlayerMovement script component
     }
 
-
-        private void OnEnable()
+    // Subscribe to the OnForcesUpdated event when the object is enabled
+    private void OnEnable()
     {
         if (amadeoClient != null)
         {
@@ -44,6 +42,7 @@ public class getEventFromAmadeoClientDiver : MonoBehaviour
         }
     }
 
+    // Unsubscribe from the OnForcesUpdated event when the object is disabled
     private void OnDisable()
     {
         if (amadeoClient != null)
@@ -52,63 +51,48 @@ public class getEventFromAmadeoClientDiver : MonoBehaviour
         }
     }
 
+    // Method to select which finger's force will control the movement
     public void SelectFinger(int fingerIndex)
     {
         indexForce = fingerIndex;
     }
 
-
+    // Handles the forces received from the Amadeo device
     private void HandleForcesUpdated(float[] forces)
     {
         Debug.Log(indexForce);
 
-        if (pm.canMove && pm.afterText)
+        if (pm.canMove && pm.afterText)  // Check if the player can move and the intro text has been shown
         {
-            if (!Panel.activeSelf && forces != null && forces.Length > 0)
+            if (!Panel.activeSelf && forces != null && forces.Length > 0)  // Ensure the panel is not active and valid forces are received
             {
-                Vector3 movementDirection = Vector3.forward; // Move along the z-axis (forward direction)
-                Vector3 targetVelocity = pm.speed * transform.TransformDirection(movementDirection);
+                pm.notGetForcesFromAmadeo = false; // Enable force reception from Amadeo
+
+                Vector3 movementDirection = Vector3.forward;  // Define movement along the z-axis
+                Vector3 targetVelocity = pm.speed * transform.TransformDirection(movementDirection);  // Calculate target velocity
 
                 Debug.Log("factor_force: " + float.Parse(factor_force_inputField.text));
-                float newVerticalPosition = forces[indexForce] * float.Parse(factor_force_inputField.text); // Apply factor here
+                float newVerticalPosition = forces[indexForce] * float.Parse(factor_force_inputField.text); // Calculate the new vertical position
                 float currentVerticalPosition = transform.position.y;
                 float verticalMovementSpeed;
+
+                // Adjust vertical speed based on the difference between current and target vertical positions
                 if (Mathf.Abs(newVerticalPosition - currentVerticalPosition) < verticalTolerance)
                 {
-                    //verticalMovementSpeed = 0;
-                    verticalMovementSpeed = pm.idleUpwardSpeed;
-                } else {
-                    verticalMovementSpeed = Mathf.Sign(newVerticalPosition - currentVerticalPosition) * pm.verticalSpeed;
+                    verticalMovementSpeed = pm.idleUpwardSpeed;  // Apply idle upward speed if within tolerance
                 }
-                //   float verticalMovementSpeed = (newVerticalPosition - currentVerticalPosition) / 0.5f; //forceValue * pm.verticalSpeed;
-                /*if (verticalMovementSpeed <= 0)
+                else
                 {
-                    verticalMovementSpeed += pm.idleUpwardSpeed;
-                }*/
+                    verticalMovementSpeed = Mathf.Sign(newVerticalPosition - currentVerticalPosition) * pm.verticalSpeed;  // Move up or down
+                }
+
+                // Add the calculated vertical movement to the target velocity
                 targetVelocity += verticalMovementSpeed * transform.TransformDirection(Vector3.up);
                 Debug.Log("targetVelocity = " + targetVelocity);
-                rb.velocity = targetVelocity;
+                rb.velocity = targetVelocity;  // Apply the target velocity to the Rigidbody
+
+                pm.notGetForcesFromAmadeo = true; // Disable force reception after applying movement
             }
         }
-
-        /*
-        if (!Panel.activeSelf && forces != null && forces.Length > 0)
-        {
-            Debug.Log("factor_force: " + float.Parse(factor_force_inputField.text));
-
-            float forceValue = forces[indexForce] * float.Parse(factor_force_inputField.text); // Apply factor here
-
-            float verticalMovementSpeed = forceValue * smoothSpeed;
-            // Calculate the target position
-                        Vector3 targetPosition = new Vector3(
-                            transform.position.x,
-                            transform.position.y + forceValue,
-                            transform.position.z
-                        );
-            
-            // Lerp towards the target position smoothly
-            // transform.position = Vector3.Lerp(transform.position, targetPosition, smoothSpeed * Time.deltaTime);
-        }*/
     }
-
 }

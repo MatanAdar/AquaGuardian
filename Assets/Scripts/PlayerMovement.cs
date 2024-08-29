@@ -49,6 +49,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] GameObject surface;
     [SerializeField] GameObject ground;
 
+    private float idleUpwardFactor = 0.5f;
+
+    public bool notGetForcesFromAmadeo = true; //check if amadeo mechine is connected or play throw the keyboard
+
     void Start()
     {
 
@@ -103,12 +107,8 @@ public class PlayerMovement : MonoBehaviour
 
             show = false;
         }
-    }
 
-    void FixedUpdate()
-    {
-
-        if (canMove && afterText)
+        if (notGetForcesFromAmadeo && canMove && afterText)
         {
             Vector3 movementDirection = Vector3.forward; // Move along the z-axis (forward direction)
             Vector3 targetVelocity = speed * transform.TransformDirection(movementDirection);
@@ -116,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
             float verticalMovementSpeed = upDownInput * verticalSpeed;
 
             // Apply idle upward speed if no input is given
-            if (upDownInput == 0)
+            if (upDownInput <= 0)
             {
                 verticalMovementSpeed += idleUpwardSpeed;
             }
@@ -129,7 +129,43 @@ public class PlayerMovement : MonoBehaviour
 
 
         }
+    }
 
+    /*void FixedUpdate()
+    {
+
+        if (canMove && afterText)
+        {
+            Vector3 movementDirection = Vector3.forward; // Move along the z-axis (forward direction)
+            Vector3 targetVelocity = speed * transform.TransformDirection(movementDirection);
+            float upDownInput = Input.GetAxis("UpDown");
+            float verticalMovementSpeed = upDownInput * verticalSpeed;
+
+            // Apply idle upward speed if no input is given
+            if (upDownInput <= 0)
+            {
+                verticalMovementSpeed += idleUpwardSpeed;
+            }
+
+            // Add vertical movement to the target velocity
+            targetVelocity += verticalMovementSpeed * transform.TransformDirection(Vector3.up);
+
+            // Apply target velocity to the Rigidbody
+            rb.velocity = targetVelocity;
+
+
+        }
+    }*/
+
+
+    void OnCollisionStay(Collision collision)
+    {
+        // Check if the player collides with a wall
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            // Move the player upward
+            rb.velocity = new Vector3(rb.velocity.x, verticalSpeed*idleUpwardFactor, rb.velocity.z);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
