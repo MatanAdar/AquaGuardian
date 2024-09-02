@@ -49,9 +49,16 @@ To use **Aqua Guardian**, connect the Amadeo device to your system, and follow t
    ![WhatsApp Image 2024-08-27 at 13 52 40_b3c245ff](https://github.com/user-attachments/assets/b6aee5b4-b948-4f5b-8e4b-05f7c27b8da0)
 
 
-3. **Start the Game:** Begin the session and control the diver using the Amadeo device.
+2. **Start the Game:** Begin the session and control the diver using the Amadeo device.
 
-4. **Monitor Progress:** Track your progress via the in-game feedback systems, including visual and audio cues.
+   ![image](https://github.com/user-attachments/assets/b757ac81-3388-4d50-b2cd-11079b644b64)
+
+3. **Monitor Progress:** Track your progress via the in-game feedback systems, including visual and audio cues.
+
+4. **Finishline:** Get to the treasure before you run out of oxygen.
+
+   ![WhatsApp Image 2024-08-27 at 18 18 51_9c9775c4](https://github.com/user-attachments/assets/7e05adb9-6c24-498e-8481-c4bee9fea784)
+
 
    
 
