@@ -54,7 +54,7 @@ To use **Aqua Guardian**, connect the Amadeo device to your system, and follow t
 
 3. **Monitor Progress:** Track your progress via the in-game feedback systems, including visual and audio cues.
 
-4. **Damage/Healing System:** Take care to avoid damaging the caves, as each collision reduces your oxygen supply. To gain oxygen, need collecting the balloons placed strategically throughout the course.
+4. **Damage/Healing System:** Take care to avoid damaging the caves, as each collision reduces your oxygen supply and spills blood. To gain oxygen, need collecting the balloons placed strategically throughout the course.
 
    <img src="https://github.com/user-attachments/assets/1313c7e0-b265-4c33-b836-5a3e8db27a26" alt="WhatsApp Image 2024-08-27 at 16 38 13_d9c67445" width="400"/>
    
