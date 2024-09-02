@@ -1,13 +1,5 @@
 # Aqua Guardian
 
-### Authors
-- **Adi Nahmias** (315260505)
-- **Matan Adar** (209321553)
-- **Hod Wyszkin** (322401605)
-
-### Project Advisor
-- **Dr. Arel David Segal-Halevi**
-
 ## Project Overview
 
 Aqua Guardian is a rehabilitative game designed to assist stroke patients in improving hand and finger mobility. The game is integrated with the Amadeo device, which tracks finger movements, allowing patients to control a diver navigating through underwater caves. The primary objective is to reach a treasure chest while maintaining oxygen levels and avoiding obstacles.
