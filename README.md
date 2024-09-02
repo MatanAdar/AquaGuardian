@@ -40,6 +40,21 @@ In **Aqua Guardian**, the patient controls a diver navigating through underwater
 - **Progress Tracking:** A progress bar keeps the patient informed of their current status and the distance remaining to the goal.
 - **Feedback Systems:** Both visual (e.g., screen effects for collisions) and audio cues (e.g., impact sounds) are used to guide and motivate the patient.
 
+## Usage
+
+To use **Aqua Guardian**, connect the Amadeo device to your system, and follow these steps:
+
+1. **Configure Game Parameters:** Adjust the difficulty settings, select the finger for training, and set other preferences using the GUI.
+
+   ![WhatsApp Image 2024-08-27 at 13 52 40_b3c245ff](https://github.com/user-attachments/assets/b6aee5b4-b948-4f5b-8e4b-05f7c27b8da0)
+
+
+3. **Start the Game:** Begin the session and control the diver using the Amadeo device.
+
+4. **Monitor Progress:** Track your progress via the in-game feedback systems, including visual and audio cues.
+
+   
+
 ## Evaluation and Results
 
 ### Experimentation
