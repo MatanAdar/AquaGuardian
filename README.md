@@ -78,12 +78,9 @@ The game was evaluated through trials with patients at the Beit Loewenstein Reha
 - **Patient Engagement:** Patients reported higher levels of engagement and motivation compared to existing rehabilitative games.
 - **Positive Outcomes:** The immersive and enjoyable nature of the game led to longer play sessions, which are crucial for effective rehabilitation.
 
-## Conclusion and Future Work
+## Conclusion
 
-**Aqua Guardian** has demonstrated its potential as a valuable tool in stroke rehabilitation. The game not only provides therapeutic benefits but also makes the rehabilitation process more enjoyable for patients. Future enhancements could include:
-
-- **Pause Functionality:** Allowing patients to take breaks without losing progress.
-- **Scoring System:** Introducing a scoring system to track progress and motivate continued improvement.
+**Aqua Guardian** has demonstrated its potential as a valuable tool in stroke rehabilitation. The game not only provides therapeutic benefits but also makes the rehabilitation process more enjoyable for patients. 
 
 ---
 
