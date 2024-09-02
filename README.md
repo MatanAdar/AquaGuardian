@@ -45,9 +45,11 @@ In **Aqua Guardian**, the patient controls a diver navigating through underwater
 
 To play **Aqua Guardian**, connect the Amadeo device to your system, and follow these steps:
 
-1. **Configure Game Parameters:** Adjust the difficulty settings, select the finger for training, and set other preferences using the GUI.
+1. **Configure Game Parameters:** Adjust the difficulty settings, select the finger for training, set other preferences using the GUI, and modify the cave settings via the provided Excel file.
 
    <img src="https://github.com/user-attachments/assets/b6aee5b4-b948-4f5b-8e4b-05f7c27b8da0" alt="WhatsApp Image 2024-08-27 at 13 52 40_b3c245ff" width="400"/>
+
+   <img src="https://github.com/user-attachments/assets/b4d03f29-a139-4345-835e-eae31e70a03f" alt="WhatsApp Image 2024-09-02 at 14 47 20_74f0a408" width="400"/>
 
 2. **Start the Game:** Begin the session and navigate the diver through the cave's obstacle course using the Amadeo device. Be aware, oxygen levels decrease over time, as defined in the settings screen (Section 1).
 
