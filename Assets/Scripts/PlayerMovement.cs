@@ -161,7 +161,7 @@ public class PlayerMovement : MonoBehaviour
     void OnCollisionStay(Collision collision)
     {
         // Check if the player collides with a wall
-        if (collision.gameObject.CompareTag("Wall"))
+        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Cave"))
         {
             // Move the player upward
             rb.velocity = new Vector3(rb.velocity.x, verticalSpeed*idleUpwardFactor, rb.velocity.z);
