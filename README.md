@@ -49,7 +49,7 @@ To play **Aqua Guardian**, connect the Amadeo device to your system, and follow 
 
    <img src="https://github.com/user-attachments/assets/b6aee5b4-b948-4f5b-8e4b-05f7c27b8da0" alt="WhatsApp Image 2024-08-27 at 13 52 40_b3c245ff" width="400"/>
 
-2. **Start the Game:** Begin the session to navigate the diver, using the Amadeo device, through the caves obstacle course.
+2. **Start the Game:** Begin the session and navigate the diver through the cave's obstacle course using the Amadeo device. Be aware, oxygen levels decrease over time, as defined in the settings screen (Section 1).
 
    <img src="https://github.com/user-attachments/assets/b757ac81-3388-4d50-b2cd-11079b644b64" alt="image" width="400"/>
 
