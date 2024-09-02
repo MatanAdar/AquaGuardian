@@ -1,54 +1,65 @@
 # Aqua Guardian
 
-## Project Overview
+## Overview
 
-Aqua Guardian is a rehabilitative game designed to assist stroke patients in improving hand and finger mobility. The game is integrated with the Amadeo device, which tracks finger movements, allowing patients to control a diver navigating through underwater caves. The primary objective is to reach a treasure chest while maintaining oxygen levels and avoiding obstacles.
+**Aqua Guardian** is an innovative rehabilitation game designed to aid stroke patients in regaining hand and finger mobility. The game integrates with the Amadeo device, allowing patients to control an underwater diver who must navigate a series of caves and obstacles. The game is both engaging and therapeutic, providing real-time feedback and adjustable difficulty levels tailored to each patient's needs.
 
-### Key Features:
-- **Patient-Centric Gameplay**: Customizable difficulty levels to match individual patient needs.
-- **Real-Time Feedback**: Both audio and visual feedback mechanisms to guide and motivate patients.
-- **Engaging Visuals**: Realistic ocean environments and dynamic animations to enhance patient immersion.
+## Table of Contents
+
+1. [Problem Statement](#problem-statement)
+2. [Objectives and Methodology](#objectives-and-methodology)
+3. [Gameplay Mechanics](#gameplay-mechanics)
+4. [Evaluation and Results](#evaluation-and-results)
+5. [Conclusion and Future Work](#conclusion-and-future-work)
+6. [Acknowledgments](#acknowledgments)
 
 ## Problem Statement
 
-Patients recovering from a stroke often struggle with hand movement, making rehabilitation exercises challenging and demotivating. Traditional rehabilitative games lack engagement, which can lead to poor adherence to therapy. Aqua Guardian aims to address this by providing a more enjoyable and motivating experience.
+Stroke patients often experience significant challenges in regaining hand and finger mobility. Traditional rehabilitation exercises are repetitive and can lead to low motivation and engagement. Existing rehabilitative games do not fully address these issues, resulting in poor patient adherence. **Aqua Guardian** seeks to enhance patient engagement through a more immersive and motivating experience.
 
-## Project Objectives and Methodology
+## Objectives and Methodology
 
-### Objectives:
-1. **Enhanced Engagement**: Develop a game that is more engaging and motivating than existing solutions.
-2. **Tailored Difficulty**: Adjust game parameters to suit each patient's capabilities and needs.
-3. **Focused Rehabilitation**: Target individual finger movements to improve hand functionality.
+### Project Objectives
 
-### Methodology:
-- **Game Design**: The patient controls a diver navigating through underwater caves. The game adapts to the patient’s abilities, ensuring that it remains challenging yet manageable.
-- **Data Integration**: Real-time force data from the Amadeo device is used to control the diver’s movements, ensuring accurate reflection of the patient’s input.
-- **Customization**: Game parameters such as cave size, diver speed, and oxygen levels can be customized to match the patient’s rehabilitation needs.
+1. **Enhanced Engagement:** Create a more engaging game experience to motivate patients in their rehabilitation exercises.
+2. **Customizable Difficulty:** Implement adaptive difficulty levels that align with each patient’s abilities.
+3. **Targeted Rehabilitation:** Focus on specific finger movements to promote better overall hand functionality.
+
+### Methodology
+
+- **Data Integration:** The game reads real-time force data from the Amadeo device, which the patient uses to control the diver's movements.
+- **Customization:** Game parameters such as the size and difficulty of caves, diver speed, and oxygen depletion are adjustable to match patient needs.
+- **Visual and Audio Feedback:** Immediate feedback is provided to the patient through visual effects and sound cues, enhancing the therapeutic experience.
 
 ## Gameplay Mechanics
 
-The game begins with setting parameters to adjust difficulty. The diver must navigate through caves, follow directional arrows, and collect oxygen balloons. Collisions with caves result in oxygen loss, and the objective is to reach the treasure chest before oxygen runs out.
+In **Aqua Guardian**, the patient controls a diver navigating through underwater caves. The diver must avoid obstacles, collect oxygen balloons, and reach the treasure chest before running out of oxygen. The game adjusts its difficulty based on the patient's performance, ensuring an appropriate level of challenge.
 
-### Critical Components:
-1. **Cave Navigation**: Patients must apply the correct amount of force to avoid collisions and maintain oxygen levels.
-2. **Feedback Systems**: Both audio and visual cues provide immediate feedback, helping patients understand their performance.
-3. **Progress Tracking**: A progress bar shows the patient’s current position in the game and the remaining distance to the treasure chest.
+### Key Features
+
+- **Dynamic Environment:** The game environment is visually engaging, with realistic ocean visuals and animated diver movements.
+- **Progress Tracking:** A progress bar keeps the patient informed of their current status and the distance remaining to the goal.
+- **Feedback Systems:** Both visual (e.g., screen effects for collisions) and audio cues (e.g., impact sounds) are used to guide and motivate the patient.
 
 ## Evaluation and Results
 
-### Experimentation:
-The game was tested with patients at the Beit Loewenstein Rehabilitation Center. The tests involved adjusting the game’s difficulty based on the patient's current functional level. Feedback from patients and observations by Dr. Shay indicated that Aqua Guardian provided a more engaging and motivating experience compared to existing games.
+### Experimentation
 
-### Patient Feedback:
-- **Increased Engagement**: Patients reported higher motivation and willingness to continue playing.
-- **Positive Emotional Response**: Patients expressed enjoyment and satisfaction with the game, which contributed to longer play sessions and better rehabilitation outcomes.
+The game was evaluated through trials with patients at the Beit Loewenstein Rehabilitation Center. Patients were connected to the Amadeo device and played **Aqua Guardian** after their functional levels were assessed. The game's difficulty was adjusted based on each patient's abilities.
 
-## Conclusion and Future Improvements
+### Feedback
 
-Aqua Guardian has shown promise as a valuable tool in stroke rehabilitation. Future enhancements could include adding a pause button for breaks and a scoring system to track patient progress and motivate continued improvement.
+- **Patient Engagement:** Patients reported higher levels of engagement and motivation compared to existing rehabilitative games.
+- **Positive Outcomes:** The immersive and enjoyable nature of the game led to longer play sessions, which are crucial for effective rehabilitation.
+
+## Conclusion and Future Work
+
+**Aqua Guardian** has demonstrated its potential as a valuable tool in stroke rehabilitation. The game not only provides therapeutic benefits but also makes the rehabilitation process more enjoyable for patients. Future enhancements could include:
+
+- **Pause Functionality:** Allowing patients to take breaks without losing progress.
+- **Scoring System:** Introducing a scoring system to track progress and motivate continued improvement.
 
 ---
 
-### Additional Information
-For more details, please refer to the full project book.
-
+### Additional Notes
+- For detailed technical explanations and further insights, please refer to the [Full Project Book](path_to_project_book.pdf).
