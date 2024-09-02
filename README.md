@@ -48,13 +48,17 @@ To use **Aqua Guardian**, connect the Amadeo device to your system, and follow t
 
    <img src="https://github.com/user-attachments/assets/b6aee5b4-b948-4f5b-8e4b-05f7c27b8da0" alt="WhatsApp Image 2024-08-27 at 13 52 40_b3c245ff" width="400"/>
 
-2. **Start the Game:** Begin the session and control the diver using the Amadeo device.
+2. **Start the Game:** Begin the session to navigate the diver, using the Amadeo device, through the caves obstacle course.
 
    <img src="https://github.com/user-attachments/assets/b757ac81-3388-4d50-b2cd-11079b644b64" alt="image" width="400"/>
 
 3. **Monitor Progress:** Track your progress via the in-game feedback systems, including visual and audio cues.
 
-4. **Finishline:** Get to the treasure before you run out of oxygen.
+4. **Damage/Healing System:** Take care to avoid damaging the caves, as each collision reduces your oxygen supply. To gain oxygen, need collecting the balloons placed strategically throughout the course.
+
+   <img src="https://github.com/user-attachments/assets/1313c7e0-b265-4c33-b836-5a3e8db27a26" alt="WhatsApp Image 2024-08-27 at 16 38 13_d9c67445" width="400"/>
+   
+5. **Finishline:** Get to the treasure before you run out of oxygen.
 
    <img src="https://github.com/user-attachments/assets/7e05adb9-6c24-498e-8481-c4bee9fea784" alt="WhatsApp Image 2024-08-27 at 18 18 51_9c9775c4" width="400"/>
 
