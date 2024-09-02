@@ -50,5 +50,5 @@ Aqua Guardian has shown promise as a valuable tool in stroke rehabilitation. Fut
 ---
 
 ### Additional Information
-For more details, please refer to the full project book or contact the project advisor, Dr. Arel David Segal-Halevi.
+For more details, please refer to the full project book.
 
