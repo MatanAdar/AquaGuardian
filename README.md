@@ -43,7 +43,7 @@ In **Aqua Guardian**, the patient controls a diver navigating through underwater
 
 ## Instructions
 
-To use **Aqua Guardian**, connect the Amadeo device to your system, and follow these steps:
+To play **Aqua Guardian**, connect the Amadeo device to your system, and follow these steps:
 
 1. **Configure Game Parameters:** Adjust the difficulty settings, select the finger for training, and set other preferences using the GUI.
 
