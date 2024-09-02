@@ -40,7 +40,7 @@ In **Aqua Guardian**, the patient controls a diver navigating through underwater
 - **Progress Tracking:** A progress bar keeps the patient informed of their current status and the distance remaining to the goal.
 - **Feedback Systems:** Both visual (e.g., screen effects for collisions) and audio cues (e.g., impact sounds) are used to guide and motivate the patient.
 
-## Usage
+## How to Play
 
 To use **Aqua Guardian**, connect the Amadeo device to your system, and follow these steps:
 
@@ -60,12 +60,10 @@ To use **Aqua Guardian**, connect the Amadeo device to your system, and follow t
 
    <img src="https://github.com/user-attachments/assets/79ab5997-cb4a-48e3-a0ab-5ef8c872824a" alt="WhatsApp Image 2024-08-28 at 22 31 59_cab6c29a" width="400"/>
 
-   
-6. **Finishline:** Get to the treasure before you run out of oxygen.
+5. **Complete the Course:** Get to the treasure before you run out of oxygen.
 
    <img src="https://github.com/user-attachments/assets/7e05adb9-6c24-498e-8481-c4bee9fea784" alt="WhatsApp Image 2024-08-27 at 18 18 51_9c9775c4" width="400"/>
 
-   
 ## Evaluation and Results
 
 ### Experimentation
