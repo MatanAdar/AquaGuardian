@@ -9,8 +9,9 @@
 1. [Problem Statement](#problem-statement)
 2. [Objectives and Methodology](#objectives-and-methodology)
 3. [Gameplay Mechanics](#gameplay-mechanics)
-4. [Evaluation and Results](#evaluation-and-results)
-5. [Conclusion and Future Work](#conclusion-and-future-work)
+4. [Instructions](#Instructions)
+5. [Evaluation and Results](#evaluation-and-results)
+6. [Conclusion and Future Work](#conclusion-and-future-work)
 
 ## Problem Statement
 
@@ -40,7 +41,7 @@ In **Aqua Guardian**, the patient controls a diver navigating through underwater
 - **Progress Tracking:** A progress bar keeps the patient informed of their current status and the distance remaining to the goal.
 - **Feedback Systems:** Both visual (e.g., screen effects for collisions) and audio cues (e.g., impact sounds) are used to guide and motivate the patient.
 
-## How to Play
+## Instructions
 
 To use **Aqua Guardian**, connect the Amadeo device to your system, and follow these steps:
 
