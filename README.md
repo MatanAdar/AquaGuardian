@@ -62,4 +62,4 @@ The game was evaluated through trials with patients at the Beit Loewenstein Reha
 ---
 
 ### Additional Notes
-- For detailed technical explanations and further insights, please refer to the [Full Project Book](path_to_project_book.pdf).
+- For detailed technical explanations and further insights, please refer to the [Full Project Book](AquaGuardian_FinalProjectBook.pdf).
