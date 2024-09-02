@@ -11,7 +11,6 @@
 3. [Gameplay Mechanics](#gameplay-mechanics)
 4. [Evaluation and Results](#evaluation-and-results)
 5. [Conclusion and Future Work](#conclusion-and-future-work)
-6. [Acknowledgments](#acknowledgments)
 
 ## Problem Statement
 
