@@ -47,13 +47,13 @@ To play **Aqua Guardian**, connect the Amadeo device to your system, and follow 
 
 1. **Configure Game Parameters:** Adjust the difficulty settings, select the finger for training, set other preferences using the GUI, and modify the cave settings via the provided Excel file.
 
-   <img src="https://github.com/user-attachments/assets/b6aee5b4-b948-4f5b-8e4b-05f7c27b8da0" alt="WhatsApp Image 2024-08-27 at 13 52 40_b3c245ff" width="400"/>
+   <img src="https://github.com/user-attachments/assets/b6aee5b4-b948-4f5b-8e4b-05f7c27b8da0" alt="WhatsApp Image 2024-08-27 at 13 52 40_b3c245ff" width="350"/>
 
-   <img src="https://github.com/user-attachments/assets/b4d03f29-a139-4345-835e-eae31e70a03f" alt="WhatsApp Image 2024-09-02 at 14 47 20_74f0a408" width="400"/>
+   <img src="https://github.com/user-attachments/assets/b4d03f29-a139-4345-835e-eae31e70a03f" alt="WhatsApp Image 2024-09-02 at 14 47 20_74f0a408" width="350"/>
 
 2. **Start the Game:** Begin the session and navigate the diver through the cave's obstacle course using the Amadeo device. Be aware, oxygen levels decrease over time, as defined in the settings screen (Section 1).
 
-   <img src="https://github.com/user-attachments/assets/b757ac81-3388-4d50-b2cd-11079b644b64" alt="image" width="400"/>
+   <img src="https://github.com/user-attachments/assets/b757ac81-3388-4d50-b2cd-11079b644b64" alt="image" width="350"/>
 
 3. **Monitor Progress:** Track your progress via the in-game feedback systems, including visual and audio cues.
 
